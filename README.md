@@ -1,0 +1,2 @@
+# logicasa
+LogiCasa Automação Inteligente
