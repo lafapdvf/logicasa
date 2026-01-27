@@ -1,132 +1,86 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Home, Wifi, Shield, Zap } from "lucide-react";
-import "./App.css";
-
-function App() {
+export default function App() {
   return (
-    <>
-      <div className="min-h-screen bg-gradient-to-b from-[#0b132b] to-[#05080f] text-slate-100">
-        {/* Header */}
-        <header className="flex items-center justify-between px-8 py-6 bg-[#0f1a33] shadow-lg">
-          <div className="flex items-center gap-3">
-            <img
-              src="/logo-logicassa.png"
-              alt="LogiCasa Automação Inteligente"
-              className="h-10 w-auto"
-            />
-          </div>
-          <nav className="space-x-6 text-sm">
-            <a className="hover:text-slate-300" href="#services">
-              Serviços
-            </a>
-            <a className="hover:text-slate-300" href="#solutions">
-              Soluções
-            </a>
-            <a className="hover:text-slate-300" href="#about">
-              Sobre
-            </a>
-            <a className="hover:text-slate-300" href="#contact">
-              Contato
-            </a>
-          </nav>
-        </header>
+    <div className="min-h-screen font-sans">
+      {/* HERO */}
+      <section className="flex flex-col items-center justify-center text-center px-6 py-32">
+        <h1 className="text-4xl md:text-6xl font-light tracking-wide">
+          LogiCasa <span className="font-semibold">Automação Inteligente</span>
+        </h1>
+        <p className="mt-6 max-w-2xl text-neutral-400 text-lg">
+          Tecnologia, conforto e sofisticação integrados para residências de
+          alto padrão.
+        </p>
+      </section>
 
-        {/* Hero */}
-        <section className="px-8 py-24 text-center bg-gradient-to-b from-slate-900 to-slate-950">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Automação Inteligente para sua{" "}
-            <span className="text-slate-300">Casa</span>
-          </h2>
-          <p className="max-w-2xl mx-auto text-slate-300 mb-8">
-            Conforto, segurança e eficiência energética com soluções modernas em
-            automação residencial.
+      {/* SOBRE */}
+      <section className="px-6 py-24 bg-neutral-900">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div>
+            <h2 className="text-3xl font-light mb-6">Sobre Nós</h2>
+            <p className="text-neutral-400 leading-relaxed">
+              A LogiCasa nasceu da união entre tecnologia e propósito. Somos
+              dois amigos e sócios — apaixonados por automação, inovação e pela
+              ideia de transformar casas em ambientes inteligentes, funcionais e
+              elegantes.
+            </p>
+          </div>
+          <div className="text-neutral-400 leading-relaxed">
+            Atuamos com foco em soluções personalizadas, entendendo que cada
+            residência é única. Nosso compromisso é entregar automação de alto
+            nível, com atenção aos detalhes, segurança e conforto.
+          </div>
+        </div>
+      </section>
+
+      {/* MISSÃO */}
+      <section className="px-6 py-24">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-light mb-6">Nossa Missão</h2>
+          <p className="text-neutral-400 text-lg leading-relaxed">
+            Levar automação residencial inteligente a um novo patamar,
+            oferecendo soluções confiáveis, sofisticadas e intuitivas que elevam
+            a experiência de morar bem.
           </p>
-          <Button className="bg-slate-300 hover:bg-slate-200 text-slate-900 font-semibold px-8 py-4 rounded-2xl">
-            Solicitar Orçamento
-          </Button>
-        </section>
+        </div>
+      </section>
 
-        {/* Services */}
-        <section id="services" className="px-8 py-20">
-          <h3 className="text-3xl font-semibold text-center mb-12">
-            Nossos Serviços
-          </h3>
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <Card className="bg-[#0f1a33] border-slate-800 rounded-2xl">
-              <CardContent className="p-6 text-center">
-                <Home className="mx-auto mb-4 text-slate-300" size={36} />
-                <h4 className="text-xl font-semibold mb-2">
-                  Automação Residencial
-                </h4>
-                <p className="text-slate-400 text-sm">
-                  Controle de iluminação, climatização e dispositivos em um
-                  único sistema.
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="bg-[#0f1a33] border-slate-800 rounded-2xl">
-              <CardContent className="p-6 text-center">
-                <Shield className="mx-auto mb-4 text-slate-300" size={36} />
-                <h4 className="text-xl font-semibold mb-2">
-                  Segurança Inteligente
-                </h4>
-                <p className="text-slate-400 text-sm">
-                  Câmeras, fechaduras eletrônicas e sensores integrados.
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="bg-[#0f1a33] border-slate-800 rounded-2xl">
-              <CardContent className="p-6 text-center">
-                <Wifi className="mx-auto mb-4 text-slate-300" size={36} />
-                <h4 className="text-xl font-semibold mb-2">Integração IoT</h4>
-                <p className="text-slate-400 text-sm">
-                  Compatibilidade com Alexa, Google Home e Home Assistant.
-                </p>
-              </CardContent>
-            </Card>
+      {/* SERVIÇOS */}
+      <section className="px-6 py-24 bg-neutral-900">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-light mb-12 text-center">Serviços</h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            {[
+              {
+                title: "Automação Residencial",
+                desc: "Iluminação, climatização, cortinas e cenas inteligentes integradas ao seu estilo de vida.",
+              },
+              {
+                title: "Segurança Inteligente",
+                desc: "Câmeras, sensores, fechaduras digitais e monitoramento remoto com total confiabilidade.",
+              },
+              {
+                title: "Integrações Personalizadas",
+                desc: "Integração com Alexa, Google Home, Apple HomeKit e sistemas sob medida.",
+              },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className="border border-neutral-800 p-8 rounded-xl hover:border-neutral-600 transition"
+              >
+                <h3 className="text-xl mb-4">{item.title}</h3>
+                <p className="text-neutral-400">{item.desc}</p>
+              </div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Solutions */}
-        <section id="solutions" className="px-8 py-20 bg-[#0f1a33]">
-          <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h3 className="text-3xl font-semibold mb-4">
-                Tecnologia que simplifica
-              </h3>
-              <p className="text-slate-300 mb-6">
-                Projetamos soluções sob medida, focadas em estabilidade,
-                segurança e fácil expansão.
-              </p>
-              <Button className="bg-slate-300 hover:bg-slate-200 text-slate-900 font-semibold rounded-xl">
-                Conhecer Soluções
-              </Button>
-            </div>
-            <Card className="bg-[#05080f] border-slate-800 rounded-2xl">
-              <CardContent className="p-8">
-                <Zap className="text-slate-300 mb-4" size={40} />
-                <p className="text-slate-400">
-                  Automação eficiente reduz custos de energia e aumenta o valor
-                  do imóvel.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-
-        {/* Footer */}
-        <footer
-          id="contact"
-          className="px-8 py-10 bg-[#05080f] border-t border-slate-800 text-center"
-        >
-          <p className="text-slate-400 text-sm">
-            © {new Date().getFullYear()} LogiCasa Automação Inteligente
-          </p>
-        </footer>
-      </div>
-    </>
+      {/* FOOTER */}
+      <footer className="px-6 py-10 text-center text-neutral-600 text-sm border-t border-neutral-800">
+        © {new Date().getFullYear()} LogiCasa Automação Inteligente. Todos os
+        direitos reservados.
+      </footer>
+    </div>
   );
 }
-
-export default App;
