@@ -382,10 +382,31 @@ export default function App() {
       </section>
 
       {/* FOOTER */}
-      <footer className="px-6 py-10 text-center text-slate-600 text-xs border-t border-white/5 bg-[#02060f]">
-        © {new Date().getFullYear()}{" "}
-        <span className="text-slate-400">LogiCasa</span> | Automação
-        Inteligente. Todos os direitos reservados.
+      <footer className="px-6 py-12 bg-[#02060f] border-t border-white/5">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="text-slate-600 text-xs text-center md:text-left">
+            © {new Date().getFullYear()}{" "}
+            <span className="text-slate-400">LogiCasa</span> | Automação
+            Inteligente. - Todos os direitos reservados.
+            <p className="mt-1">CNPJ: 00.000.000/0001-00</p>{" "}
+            {/* Importante para Google Ads */}
+          </div>
+
+          <div className="flex gap-8 text-[10px] uppercase tracking-widest font-medium">
+            <button
+              onClick={() => setModalContent("privacidade")}
+              className="text-slate-500 hover:text-[#00c2ff] transition"
+            >
+              Privacidade
+            </button>
+            <button
+              onClick={() => setModalContent("termos")}
+              className="text-slate-500 hover:text-[#00c2ff] transition"
+            >
+              Termos de Uso
+            </button>
+          </div>
+        </div>
       </footer>
 
       {/* MODAL LGPD */}
