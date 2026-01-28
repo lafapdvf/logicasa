@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import logo from "./assets/logo.jpeg";
+import logicasa from "./assets/logicasa.png";
 
 export default function App() {
   const [result, setResult] = useState("");
@@ -65,9 +65,9 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex items-center">
             <img
-              src={logo}
+              src={logicasa}
               alt="LogiCasa Logo"
-              className="h-8 md:h-20 w-auto"
+              className="h-8 md:h-14 w-auto"
             />
           </div>
 
@@ -178,10 +178,9 @@ export default function App() {
             </h2>
             <p className="leading-relaxed text-lg mb-6">
               A LogiCasa nasceu da união entre entusiasmo por tecnologia e
-              propósito. Somos dois melhores amigos há 30 anos e nos entendemos
-              até sem falar — apaixonados por automação, inovação e pela ideia
-              de transformar casas em ambientes inteligentes, funcionais e
-              elegantes.
+              propósito. Somos dois amigos entrosados há 3 décadas e que se
+              realizam com a automação, inovação e com a ideia de transformar
+              casas em ambientes inteligentes, funcionais e elegantes.
             </p>
             <p className="leading-relaxed border-l-2 border-[#00c2ff] pl-6 py-2 italic text-slate-400">
               Atuamos com foco em soluções personalizadas, entendendo que cada
