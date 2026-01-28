@@ -1,9 +1,31 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import logo from "./assets/logo.jpeg";
 
 export default function App() {
   const [result, setResult] = useState("");
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // Estado para o menu mobile
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState(""); // Novo estado
+
+  // Lógica para detectar a seção visível
+  useEffect(() => {
+    const observers = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.6 }, // Ativa quando 60% da seção estiver visível
+    );
+
+    navLinks.forEach((link) => {
+      const el = document.querySelector(link.href);
+      if (el) observers.observe(el);
+    });
+
+    return () => observers.disconnect();
+  }, []);
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -57,14 +79,22 @@ export default function App() {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-xs uppercase tracking-[0.2em] text-slate-400 hover:text-[#00c2ff] transition-colors font-medium"
+                className={`text-xs uppercase tracking-[0.2em] transition-colors font-medium ${
+                  activeSection === link.href.replace("#", "")
+                    ? "text-[#00c2ff]"
+                    : "text-slate-400 hover:text-[#00c2ff]"
+                }`}
               >
                 {link.name}
               </a>
             ))}
             <a
               href="#contato"
-              className="px-5 py-2 border border-[#00c2ff]/30 text-[#00c2ff] text-xs uppercase tracking-widest rounded-full hover:bg-[#00c2ff] hover:text-black transition-all duration-300"
+              className={`px-5 py-2 border text-xs uppercase tracking-widest rounded-full transition-all duration-300 ${
+                activeSection === "contato"
+                  ? "bg-[#00c2ff] text-black border-[#00c2ff]"
+                  : "border-[#00c2ff]/30 text-[#00c2ff] hover:bg-[#00c2ff] hover:text-black"
+              }`}
             >
               Orçamento
             </a>
@@ -99,7 +129,11 @@ export default function App() {
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsMenuOpen(false)}
-                className="text-sm uppercase tracking-widest text-slate-300"
+                className={`text-sm uppercase tracking-widest transition-colors ${
+                  activeSection === link.href.replace("#", "")
+                    ? "text-[#00c2ff]"
+                    : "text-slate-300"
+                }`}
               >
                 {link.name}
               </a>
