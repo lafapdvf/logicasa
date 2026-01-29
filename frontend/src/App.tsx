@@ -107,7 +107,7 @@ export default function App() {
                 Instagram
               </a>
               <a
-                href="https://wa.me/5511999999999"
+                href="https://wa.me/5511963889536"
                 className="text-white hover:text-[#00c2ff] transition"
               >
                 WhatsApp
