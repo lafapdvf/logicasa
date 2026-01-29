@@ -107,7 +107,7 @@ export default function App() {
                 Instagram
               </a>
               <a
-                href="https://wa.me/5511963889536"
+                href="https://wa.me/5511999999999"
                 className="text-white hover:text-[#00c2ff] transition"
               >
                 WhatsApp
@@ -353,7 +353,7 @@ export default function App() {
                       href="https://wa.me/5511999999999"
                       className="text-white hover:text-[#00c2ff] transition text-lg"
                     >
-                      +55 (11) 96388-9536
+                      +55 (11) 99999-9999
                     </a>
                   </div>
                 </div>
