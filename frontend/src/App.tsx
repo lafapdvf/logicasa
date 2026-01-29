@@ -8,6 +8,19 @@ export default function App() {
   const [modalContent, setModalContent] = useState<
     "privacidade" | "termos" | null
   >(null);
+  const [showCookieBanner, setShowCookieBanner] = useState(false);
+
+  useEffect(() => {
+    const consent = localStorage.getItem("logicasa_cookie_consent");
+    if (!consent) {
+      setShowCookieBanner(true);
+    }
+  }, []);
+
+  const acceptCookies = () => {
+    localStorage.setItem("logicasa_cookie_consent", "true");
+    setShowCookieBanner(false);
+  };
 
   useEffect(() => {
     const observers = new IntersectionObserver(
@@ -462,6 +475,38 @@ export default function App() {
                 </p>
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* BANNER DE COOKIES */}
+      {showCookieBanner && (
+        <div className="fixed bottom-6 left-6 right-6 z-[60] animate-fade-in-up">
+          <div className="max-w-4xl mx-auto bg-[#08101f]/95 backdrop-blur-md border border-white/10 p-6 rounded-2xl shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex-1">
+              <h4 className="text-[#00c2ff] text-sm font-bold uppercase tracking-widest mb-2">
+                Privacidade & Cookies
+              </h4>
+              <p className="text-slate-400 text-sm leading-relaxed">
+                Utilizamos cookies para personalizar sua experiência e analisar
+                nosso tráfego conforme nossa{" "}
+                <button
+                  onClick={() => setModalContent("privacidade")}
+                  className="text-white underline hover:text-[#00c2ff]"
+                >
+                  Política de Privacidade
+                </button>
+                .
+              </p>
+            </div>
+            <div className="flex gap-4 w-full md:w-auto">
+              <button
+                onClick={acceptCookies}
+                className="flex-1 md:flex-none px-8 py-3 bg-[#00c2ff] text-black text-[10px] font-bold uppercase tracking-widest rounded-xl hover:bg-white transition-all duration-300"
+              >
+                Aceitar
+              </button>
+            </div>
           </div>
         </div>
       )}
