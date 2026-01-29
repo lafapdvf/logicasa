@@ -9,6 +9,7 @@ export default function App() {
     "privacidade" | "termos" | null
   >(null);
   const [showCookieBanner, setShowCookieBanner] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   useEffect(() => {
     const consent = localStorage.getItem("logicasa_cookie_consent");
@@ -56,6 +57,8 @@ export default function App() {
       const data = await response.json();
       if (data.success) {
         setResult("Mensagem enviada com sucesso!");
+        setIsSubmitted(true);
+        window.scrollTo(0, 0); // Sobe a página para o topo
         (event.target as HTMLFormElement).reset();
       } else {
         setResult(data.message || "Ocorreu um erro ao enviar.");
@@ -73,6 +76,58 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#02060f] text-white font-sans selection:bg-[#00c2ff] selection:text-black">
+      {isSubmitted ? (
+        <section className="min-h-screen flex flex-col items-center justify-center px-6 text-center bg-[#02060f]">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#00c2ff]/10 blur-[120px] rounded-full -z-10"></div>
+
+          <div className="w-20 h-20 bg-[#00c2ff]/10 border border-[#00c2ff]/20 rounded-full flex items-center justify-center mb-8 animate-bounce">
+            <span className="text-4xl">✅</span>
+          </div>
+
+          <h1 className="text-4xl md:text-5xl font-light mb-6">
+            Proposta{" "}
+            <span className="text-[#00c2ff] font-semibold">Solicitada!</span>
+          </h1>
+
+          <p className="text-slate-400 text-lg max-w-xl mb-10 leading-relaxed">
+            Obrigado por escolher a <strong>LogiCasa</strong>. Já recebemos seus
+            dados e um de nossos especialistas entrará em contato em breve para
+            agendar sua visita técnica.
+          </p>
+
+          <div className="space-y-4">
+            <p className="text-xs uppercase tracking-[0.3em] text-slate-500 mb-4">
+              Enquanto isso, siga-nos
+            </p>
+            <div className="flex justify-center gap-6">
+              <a
+                href="https://instagram.com/logicasa_automacao"
+                className="text-white hover:text-[#00c2ff] transition"
+              >
+                Instagram
+              </a>
+              <a
+                href="https://wa.me/5511999999999"
+                className="text-white hover:text-[#00c2ff] transition"
+              >
+                WhatsApp
+              </a>
+            </div>
+          </div>
+
+          <button
+            onClick={() => setIsSubmitted(false)}
+            className="mt-12 text-slate-500 hover:text-white text-xs uppercase tracking-widest border-b border-slate-800 pb-1"
+          >
+            Voltar ao site
+          </button>
+        </section>
+      ) : (
+        <>
+          {/* AQUI VAI TODO O CONTEÚDO ATUAL DO SEU SITE (Header, Hero, Sobre, etc) */}
+        </>
+      )}
+
       {/* HEADER */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-[#02060f]/90 backdrop-blur-lg border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
