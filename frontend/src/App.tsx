@@ -47,7 +47,8 @@ export default function App() {
     event.preventDefault();
     setResult("Enviando...");
     const formData = new FormData(event.currentTarget);
-    formData.append("access_key", "SEU-TOKEN-AQUI");
+    const accessKey = import.meta.env.VITE_WEB3FORMS_KEY;
+    formData.append("access_key", accessKey);
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
