@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import logicasa from "./assets/logicasa.png";
 import lafa from "./assets/lafaiete.webp";
 import rafa from "./assets/rafael.webp";
+import smarthome from "./assets/smarthome.webp";
 
 export default function App() {
   const [result, setResult] = useState("");
@@ -188,7 +189,7 @@ export default function App() {
             {/* Imagem de Fundo Estilizada */}
             <div className="absolute inset-0 z-0">
               <img
-                src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&q=80&w=2000"
+                src={smarthome}
                 alt="Smart Home background"
                 className="w-full h-full object-cover opacity-20"
               />
