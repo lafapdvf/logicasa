@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import logicasa from "./assets/logicasa.png";
-import lafa from "./assets/lafaiete-pereira.webp";
-import rafa from "./assets/rafael-camargo.webp";
+import lafa from "./assets/lafaiete.webp";
+import rafa from "./assets/rafael.webp";
 
 export default function App() {
   const [result, setResult] = useState("");
