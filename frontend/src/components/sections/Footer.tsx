@@ -5,17 +5,35 @@ export function Footer() {
     "privacidade" | "termos" | null
   >(null);
   const [showCookieBanner, setShowCookieBanner] = useState(false);
+  const [showScrollButton, setShowScrollButton] = useState(false);
 
   useEffect(() => {
+    // Verifica o consentimento de cookies
     const consent = localStorage.getItem("logicasa_cookie_consent");
     if (!consent) {
       setShowCookieBanner(true);
     }
+
+    // Lógica para mostrar o botão flutuante apenas após um certo scroll
+    const handleScroll = () => {
+      if (window.scrollY > 400) {
+        setShowScrollButton(true);
+      } else {
+        setShowScrollButton(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const acceptCookies = () => {
     localStorage.setItem("logicasa_cookie_consent", "true");
     setShowCookieBanner(false);
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -45,6 +63,30 @@ export function Footer() {
           </div>
         </div>
       </footer>
+
+      {/* BOTÃO FLUTUANTE VOLTAR AO TOPO */}
+      <button
+        onClick={scrollToTop}
+        className={`fixed bottom-8 right-8 z-[120] p-4 bg-[#00c2ff] text-black rounded-full shadow-2xl transition-all duration-300 hover:bg-white hover:scale-110 active:scale-95 flex items-center justify-center ${
+          showScrollButton
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-10 pointer-events-none"
+        }`}
+        aria-label="Voltar ao topo"
+      >
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="m18 15-6-6-6 6" />
+        </svg>
+      </button>
 
       {/* MODAL LGPD */}
       {modalContent && (
