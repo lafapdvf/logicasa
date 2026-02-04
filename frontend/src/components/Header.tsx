@@ -17,12 +17,18 @@ export function Header({ activeSection }: HeaderProps) {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
 
+  // Função auxiliar para normalizar e comparar as seções
+  const isActive = (href: string) => {
+    const sectionId = href.replace("#", "");
+    return activeSection === sectionId;
+  };
+
   return (
     <>
-      {/* OVERLAY: Escurece o restante da página quando o menu abre */}
+      {/* OVERLAY: Fundo escurecido suave */}
       {isMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[90] md:hidden transition-opacity"
+          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[90] md:hidden transition-opacity duration-500"
           onClick={closeMenu}
         />
       )}
@@ -45,7 +51,7 @@ export function Header({ activeSection }: HeaderProps) {
                 key={link.name}
                 href={link.href}
                 className={`text-xs uppercase tracking-[0.2em] transition-colors font-medium ${
-                  activeSection === link.href.replace("#", "")
+                  isActive(link.href)
                     ? "text-[#00c2ff]"
                     : "text-slate-400 hover:text-[#00c2ff]"
                 }`}
@@ -59,7 +65,6 @@ export function Header({ activeSection }: HeaderProps) {
           <button
             className="md:hidden text-[#00c2ff] p-2 z-[110]"
             onClick={toggleMenu}
-            aria-label={isMenuOpen ? "Fechar menu" : "Abrir menu"}
           >
             <div className="w-6 h-5 relative flex flex-col justify-between">
               <span
@@ -79,20 +84,29 @@ export function Header({ activeSection }: HeaderProps) {
         <div
           className={`fixed inset-x-0 top-[80px] bg-[#02060f]/70 backdrop-blur-2xl border-b border-white/10 transition-all duration-500 ease-in-out md:hidden overflow-hidden ${
             isMenuOpen
-              ? "max-h-[400px] opacity-100 pointer-events-auto"
+              ? "max-h-[400px] opacity-100"
               : "max-h-0 opacity-0 pointer-events-none"
           }`}
         >
           <nav className="flex flex-col items-center justify-start py-12 gap-8">
-            {navLinks.map((link) => (
+            {navLinks.map((link, index) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={closeMenu}
-                className={`text-xl uppercase tracking-[0.3em] transition-all drop-shadow-md ${
-                  activeSection === link.href.replace("#", "")
+                style={{
+                  transitionDelay: isMenuOpen
+                    ? `${(index + 1) * 100}ms`
+                    : "0ms",
+                }}
+                className={`text-xl uppercase tracking-[0.3em] transition-all duration-500 transform ${
+                  isMenuOpen
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-4 opacity-0"
+                } ${
+                  isActive(link.href)
                     ? "text-[#00c2ff] font-bold"
-                    : "text-white" // Mudei para white para destacar mais no fundo semi-transparente
+                    : "text-white/80"
                 }`}
               >
                 {link.name}
