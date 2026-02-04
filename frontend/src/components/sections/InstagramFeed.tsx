@@ -1,52 +1,101 @@
+import { Instagram } from "lucide-react";
+
 export function InstagramFeed() {
-  // Exemplo de dados (que poderiam vir de uma API ou serem estáticos)
   const posts = [
-    { id: 1, url: "link-do-post", thumb: "url-da-imagem", views: "12.5k" },
-    { id: 2, url: "link-do-post", thumb: "url-da-imagem", views: "10.2k" },
-    { id: 3, url: "link-do-post", thumb: "url-da-imagem", views: "8.7k" },
+    {
+      id: 1,
+      link: "https://www.instagram.com/p/EXEMPLO1",
+      thumb: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
+      metric: "MAIS VISTO",
+      legenda: "Automação completa em cobertura duplex.",
+    },
+    {
+      id: 2,
+      link: "https://www.instagram.com/p/EXEMPLO2",
+      thumb: "https://images.unsplash.com/photo-1558603668-6570496b66f8",
+      metric: "DESTAQUE",
+      legenda: "Iluminação inteligente e conforto térmico.",
+    },
+    {
+      id: 3,
+      link: "https://www.instagram.com/p/EXEMPLO3",
+      thumb: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d",
+      metric: "TENDÊNCIA",
+      legenda: "Home Cinema: a experiência definitiva.",
+    },
   ];
 
   return (
-    <section className="px-6 py-24 bg-[#050a15]">
+    <section className="px-6 py-24 bg-[#050a15] border-b border-white/5 overflow-hidden">
       <div className="max-w-6xl mx-auto">
-        <div className="flex justify-between items-end mb-12">
-          <div>
-            <h2 className="text-3xl font-light text-white italic">
-              Vistos no{" "}
+        {/* CABEÇALHO */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div className="max-w-xl">
+            <h2 className="text-4xl font-light text-white italic mb-4">
+              Nossos{" "}
               <span className="text-[#00c2ff] not-italic font-semibold">
-                Instagram
+                Destaques
               </span>
             </h2>
-            <p className="text-slate-400 mt-2">
-              Os projetos que mais inspiraram nossa comunidade.
+            <p className="text-slate-400 leading-relaxed">
+              Curadoria dos nossos posts com maior impacto e engajamento no
+              Instagram.
             </p>
           </div>
           <a
-            href="#"
-            className="text-[#00c2ff] text-sm font-bold uppercase tracking-widest hover:underline"
+            href="https://instagram.com/logicasa"
+            target="_blank"
+            className="inline-flex items-center gap-3 text-white bg-white/5 border border-white/10 px-6 py-3 rounded-full hover:bg-[#00c2ff]/10 transition-all duration-300"
           >
-            Ver perfil →
+            <Instagram className="w-5 h-5 text-[#00c2ff]" />
+            <span className="text-sm font-bold tracking-widest uppercase">
+              Seguir LogiCasa
+            </span>
           </a>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* CONTAINER DO SLIDER / GRID */}
+        {/* 'snap-x' permite o efeito de imã ao deslizar no mobile */}
+        <div className="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible pb-8 md:pb-0 snap-x snap-mandatory scrollbar-hide">
           {posts.map((post) => (
             <a
               key={post.id}
-              href={post.url}
+              href={post.link}
               target="_blank"
-              className="group relative aspect-square overflow-hidden rounded-2xl bg-white/5 border border-white/10"
+              className="group relative block min-w-[85%] md:min-w-full snap-center"
             >
-              <img
-                src={post.thumb}
-                className="w-full h-full object-cover transition duration-500 group-hover:scale-110 group-hover:rotate-2 opacity-80 group-hover:opacity-100"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                <span className="text-white text-sm font-medium">
-                  🔥 {post.views} visualizações
-                </span>
+              <div className="relative aspect-[4/5] overflow-hidden rounded-2xl border border-white/10 bg-slate-900 transition-all duration-500 group-hover:border-[#00c2ff]/40">
+                <img
+                  src={post.thumb}
+                  alt={post.legenda}
+                  className="w-full h-full object-cover opacity-70 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 grayscale-[30%] group-hover:grayscale-0"
+                />
+
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050a15] via-transparent to-transparent opacity-90 group-hover:opacity-60 transition-opacity" />
+
+                <div className="absolute top-4 left-4">
+                  <span className="bg-[#00c2ff] text-[#050a15] text-[10px] font-black px-3 py-1 rounded-full uppercase">
+                    {post.metric}
+                  </span>
+                </div>
+
+                <div className="absolute bottom-6 left-6 right-6">
+                  <p className="text-white font-medium leading-snug mb-2">
+                    {post.legenda}
+                  </p>
+                  <span className="text-[#00c2ff] text-xs font-bold opacity-0 group-hover:opacity-100 transition-all">
+                    Ver no Instagram →
+                  </span>
+                </div>
               </div>
             </a>
+          ))}
+        </div>
+
+        {/* INDICADOR VISUAL PARA MOBILE */}
+        <div className="flex justify-center gap-2 mt-4 md:hidden">
+          {posts.map((_, i) => (
+            <div key={i} className="w-1.5 h-1.5 rounded-full bg-white/20"></div>
           ))}
         </div>
       </div>

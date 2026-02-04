@@ -1,4 +1,5 @@
 import { ContactForm } from "./../ContactForm";
+import { Mail, Instagram, MessageCircle, Phone } from "lucide-react";
 
 interface ContactSectionProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -11,56 +12,68 @@ export function Contact({ onSubmit, result }: ContactSectionProps) {
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           <div className="flex flex-col justify-center">
-            <h2 className="text-4xl font-light mb-6 text-white">
-              Vamos Conversar?
+            <h2 className="text-4xl font-light mb-6 text-white italic">
+              Vamos{" "}
+              <span className="text-[#00c2ff] not-italic font-semibold">
+                Conversar?
+              </span>
             </h2>
             <p className="text-slate-400 text-lg mb-8">
               Pronto para transformar sua casa? Será um prazer desenharmos um
               projeto exclusivo para você.
             </p>
-            <div className="space-y-6">
-              <div className="flex items-center gap-5">
-                <div className="w-12 h-12 rounded-xl bg-[#00c2ff]/10 flex items-center justify-center border border-[#00c2ff]/20 text-[#00c2ff]">
-                  📱
+
+            <div className="space-y-8">
+              {/* WHATSAPP */}
+              <div className="flex items-center gap-5 group">
+                <div className="w-12 h-12 rounded-xl bg-[#00c2ff]/10 flex items-center justify-center border border-[#00c2ff]/20 text-[#00c2ff] group-hover:bg-[#00c2ff]/20 group-hover:border-[#00c2ff]/40 transition-all duration-300">
+                  <MessageCircle size={20} />
                 </div>
                 <div>
-                  <p className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">
+                  <p className="text-[10px] text-slate-500 uppercase tracking-[0.2em] font-bold">
                     WhatsApp
                   </p>
                   <a
                     href="https://wa.me/5511999999999"
-                    className="text-white hover:text-[#00c2ff] transition text-lg"
+                    className="text-white hover:text-[#00c2ff] transition-colors text-lg font-light"
                   >
                     +55 (11) 99999-9999
                   </a>
                 </div>
               </div>
-              <div className="flex items-center gap-5">
-                <div className="w-12 h-12 rounded-xl bg-[#00c2ff]/10 flex items-center justify-center border border-[#00c2ff]/20 text-[#00c2ff]">
-                  ✉️
+
+              {/* E-MAIL */}
+              <div className="flex items-center gap-5 group">
+                <div className="w-12 h-12 rounded-xl bg-[#00c2ff]/10 flex items-center justify-center border border-[#00c2ff]/20 text-[#00c2ff] group-hover:bg-[#00c2ff]/20 group-hover:border-[#00c2ff]/40 transition-all duration-300">
+                  <Mail size={20} />
                 </div>
                 <div>
-                  <p className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">
+                  <p className="text-[10px] text-slate-500 uppercase tracking-[0.2em] font-bold">
                     E-mail
                   </p>
-                  <p className="text-white text-lg font-light">
+                  <a
+                    href="mailto:contato@logicasa.com.br"
+                    className="text-white hover:text-[#00c2ff] transition-colors text-lg font-light"
+                  >
                     contato@logicasa.com.br
-                  </p>
+                  </a>
                 </div>
               </div>
-              <div className="flex items-center gap-5">
-                <div className="w-12 h-12 rounded-xl bg-[#00c2ff]/10 flex items-center justify-center border border-[#00c2ff]/20 text-[#00c2ff]">
-                  📸
+
+              {/* INSTAGRAM */}
+              <div className="flex items-center gap-5 group">
+                <div className="w-12 h-12 rounded-xl bg-[#00c2ff]/10 flex items-center justify-center border border-[#00c2ff]/20 text-[#00c2ff] group-hover:bg-[#00c2ff]/20 group-hover:border-[#00c2ff]/40 transition-all duration-300">
+                  <Instagram size={20} />
                 </div>
                 <div>
-                  <p className="text-[10px] text-slate-500 uppercase tracking-widest font-bold">
+                  <p className="text-[10px] text-slate-500 uppercase tracking-[0.2em] font-bold">
                     Instagram
                   </p>
                   <a
                     href="https://instagram.com/logicasa_automacao"
                     target="_blank"
                     rel="noreferrer"
-                    className="text-white hover:text-[#00c2ff] transition text-lg"
+                    className="text-white hover:text-[#00c2ff] transition-colors text-lg font-light"
                   >
                     @logicasa_automacao
                   </a>
