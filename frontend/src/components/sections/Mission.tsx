@@ -8,8 +8,11 @@ export function Mission() {
         <p className="text-white text-2xl md:text-4xl font-light leading-relaxed">
           "Difundir e levar a automação residencial a um novo patamar, com
           soluções{" "}
-          <span className="text-[#00c2ff] font-medium">intuitivas</span> que
-          elevam a experiência de morar bem."
+          <span className="text-[#00c2ff] font-medium">
+            intuitivas e acessíveis
+          </span>{" "}
+          que elevam a experiência de morar bem e valorizam o imóvel de forma
+          significativa."
         </p>
       </div>
     </section>

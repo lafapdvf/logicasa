@@ -26,9 +26,9 @@ export function About() {
           <div className="relative group">
             <div className="absolute -inset-4 bg-[#00c2ff]/20 blur-xl rounded-2xl opacity-0 group-hover:opacity-100 transition duration-700"></div>
             <img
-              src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=1000"
+              src="https://i.pinimg.com/1200x/65/db/fe/65dbfe6053b93395a44a55f35679e70c.jpg"
               alt="Design de interior moderno"
-              className="relative rounded-2xl grayscale hover:grayscale-0 transition duration-700 object-cover h-[400px] w-full shadow-2xl"
+              className="relative rounded-2xl grayscale-[70%] hover:grayscale-0 transition duration-700 object-cover h-[400px] w-full shadow-2xl"
             />
           </div>
           <div className="text-slate-300">
@@ -40,13 +40,14 @@ export function About() {
             </h2>
             <p className="leading-relaxed text-lg mb-6">
               A LogiCasa nasceu da união entre entusiasmo por tecnologia e
-              propósito. Somos dois amigos entrosados há 3 décadas que
-              transformam casas em ambientes inteligentes, funcionais e
-              elegantes.
+              propósito. Atuamos com foco em soluções personalizadas, entendendo
+              que cada residência é única e demanda peculiaridades.
             </p>
             <p className="leading-relaxed border-l-2 border-[#00c2ff] pl-6 py-2 italic text-slate-400">
-              Atuamos com foco em soluções personalizadas, entendendo que cada
-              residência é única.
+              Somos dois amigos entrosados há 3 décadas que uniram experiências
+              e conhecimentos para transformar residências em ambientes
+              inteligentes, funcionais, elegantes, aconchegantes e de alto
+              valor.
             </p>
           </div>
         </div>
