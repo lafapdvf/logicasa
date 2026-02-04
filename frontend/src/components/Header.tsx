@@ -77,7 +77,7 @@ export function Header({ activeSection }: HeaderProps) {
 
         {/* MOBILE MENU OVERLAY */}
         <div
-          className={`fixed inset-x-0 top-[80px] bg-[#02060f]/95 backdrop-blur-xl border-b border-white/10 transition-all duration-500 ease-in-out md:hidden overflow-hidden ${
+          className={`fixed inset-x-0 top-[80px] bg-[#02060f]/70 backdrop-blur-2xl border-b border-white/10 transition-all duration-500 ease-in-out md:hidden overflow-hidden ${
             isMenuOpen
               ? "max-h-[400px] opacity-100 pointer-events-auto"
               : "max-h-0 opacity-0 pointer-events-none"
@@ -89,10 +89,10 @@ export function Header({ activeSection }: HeaderProps) {
                 key={link.name}
                 href={link.href}
                 onClick={closeMenu}
-                className={`text-xl uppercase tracking-[0.3em] transition-all ${
+                className={`text-xl uppercase tracking-[0.3em] transition-all drop-shadow-md ${
                   activeSection === link.href.replace("#", "")
                     ? "text-[#00c2ff] font-bold"
-                    : "text-slate-400"
+                    : "text-white" // Mudei para white para destacar mais no fundo semi-transparente
                 }`}
               >
                 {link.name}
