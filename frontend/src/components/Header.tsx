@@ -44,12 +44,6 @@ export function Header({ activeSection }: HeaderProps) {
               {link.name}
             </a>
           ))}
-          <a
-            href="#contato"
-            className="px-5 py-2 border border-[#00c2ff]/30 text-[#00c2ff] hover:bg-[#00c2ff] hover:text-black text-xs uppercase tracking-widest rounded-full transition-all duration-300"
-          >
-            Orçamento
-          </a>
         </nav>
 
         {/* MOBILE TOGGLE BUTTON */}
@@ -79,7 +73,7 @@ export function Header({ activeSection }: HeaderProps) {
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
         }`}
-        style={{ top: "80px" }} // Começa logo abaixo do header
+        style={{ top: "80px" }}
       >
         <nav className="flex flex-col items-center justify-start pt-12 gap-8 h-full">
           {navLinks.map((link) => (
@@ -96,13 +90,6 @@ export function Header({ activeSection }: HeaderProps) {
               {link.name}
             </a>
           ))}
-          <a
-            href="#contato"
-            onClick={closeMenu}
-            className="mt-4 px-10 py-4 bg-[#00c2ff] text-black text-sm uppercase tracking-[0.2em] font-bold rounded-full"
-          >
-            Solicitar Orçamento
-          </a>
         </nav>
       </div>
     </header>
