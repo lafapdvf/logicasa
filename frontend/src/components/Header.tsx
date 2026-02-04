@@ -17,16 +17,15 @@ export function Header({ activeSection: initialActiveSection }: HeaderProps) {
 
   // 1. Lógica para detectar a seção ativa durante o scroll (Funciona bem no Mobile)
   useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-
     const observerOptions = {
       root: null,
-      rootMargin: "-20% 0px -70% 0px", // Detecta quando a seção está no topo/centro da tela
+      rootMargin: "-20% 0px -70% 0px",
       threshold: 0,
     };
 
     const handleIntersect = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
+        // Se a seção entrar na área visível definida no rootMargin
         if (entry.isIntersecting) {
           setCurrentSection(entry.target.id);
         }
@@ -35,13 +34,17 @@ export function Header({ activeSection: initialActiveSection }: HeaderProps) {
 
     const observer = new IntersectionObserver(handleIntersect, observerOptions);
 
+    // Observa cada seção baseada nos links do navLinks
     navLinks.forEach((link) => {
       const element = document.querySelector(link.href);
-      if (element) observer.observe(element);
+      if (element) {
+        observer.observe(element);
+      }
     });
 
+    // Cleanup: Desconecta o observer ao desmontar o componente
     return () => observer.disconnect();
-  }, []);
+  }, []); // Dependência vazia para rodar apenas uma vez no mount
 
   // 2. Função para voltar ao topo
   const scrollToTop = () => {
