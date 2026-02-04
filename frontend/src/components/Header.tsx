@@ -1,12 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import logicasa from "../assets/logicasa.png";
 
 interface HeaderProps {
   activeSection: string;
 }
 
-export function Header({ activeSection }: HeaderProps) {
+export function Header({ activeSection: initialActiveSection }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [currentSection, setCurrentSection] = useState(initialActiveSection);
 
   const navLinks = [
     { name: "Sobre", href: "#sobre" },
@@ -14,18 +15,48 @@ export function Header({ activeSection }: HeaderProps) {
     { name: "Contato", href: "#contato" },
   ];
 
+  // 1. Lógica para detectar a seção ativa durante o scroll (Funciona bem no Mobile)
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+
+    const observerOptions = {
+      root: null,
+      rootMargin: "-20% 0px -70% 0px", // Detecta quando a seção está no topo/centro da tela
+      threshold: 0,
+    };
+
+    const handleIntersect = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setCurrentSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersect, observerOptions);
+
+    navLinks.forEach((link) => {
+      const element = document.querySelector(link.href);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  // 2. Função para voltar ao topo
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    closeMenu();
+  };
+
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
 
-  // Função auxiliar para normalizar e comparar as seções
-  const isActive = (href: string) => {
-    const sectionId = href.replace("#", "");
-    return activeSection === sectionId;
-  };
+  const isActive = (href: string) => href.replace("#", "") === currentSection;
 
   return (
     <>
-      {/* OVERLAY: Fundo escurecido suave */}
+      {/* OVERLAY */}
       {isMenuOpen && (
         <div
           className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[90] md:hidden transition-opacity duration-500"
@@ -35,12 +66,15 @@ export function Header({ activeSection }: HeaderProps) {
 
       <header className="fixed top-0 left-0 right-0 z-[100] bg-[#02060f]/95 backdrop-blur-lg border-b border-white/5">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          {/* LOGO */}
-          <div className="flex items-center">
+          {/* LOGO - Agora com clique para voltar ao topo */}
+          <div
+            className="flex items-center cursor-pointer"
+            onClick={scrollToTop}
+          >
             <img
               src={logicasa}
               alt="LogiCasa Logo"
-              className="h-8 md:h-14 w-auto"
+              className="h-8 md:h-14 w-auto active:scale-95 transition-transform"
             />
           </div>
 
