@@ -4,6 +4,7 @@ import { Hero } from "./components/sections/Hero";
 import { About } from "./components/sections/About";
 import { Mission } from "./components/sections/Mission";
 import { Services } from "./components/sections/Services";
+import { InstagramFeed } from "./components/sections/InstagramFeed";
 import { Contact } from "./components/sections/Contact";
 import { Footer } from "./components/sections/Footer";
 import { SuccessScreen } from "./components/sections/SuccessScreen";
@@ -53,6 +54,7 @@ export default function App() {
             <About />
             <Mission />
             <Services />
+            <InstagramFeed />
             <Contact onSubmit={onSubmit} result={result} />
           </main>
           <Footer />
