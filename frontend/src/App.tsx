@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import logicasa from "./assets/logicasa.png";
-import lafa from "./assets/lafaiete.webp";
-import rafa from "./assets/rafael.webp";
+import { Header } from "./components/sections/Header";
+import { About } from "./components/sections/About";
+import { Services } from "./components/sections/Services";
+import { ContactForm } from "./components/sections/ContactForm";
 import smarthome from "./assets/smarthome.webp";
 
 export default function App() {
   const [result, setResult] = useState("");
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [modalContent, setModalContent] = useState<
     "privacidade" | "termos" | null
@@ -129,60 +129,7 @@ export default function App() {
       ) : (
         <>
           {/* HEADER */}
-          <header className="fixed top-0 left-0 right-0 z-50 bg-[#02060f]/90 backdrop-blur-lg border-b border-white/5">
-            <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-              <div className="flex items-center">
-                <img
-                  src={logicasa}
-                  alt="LogiCasa Logo"
-                  className="h-8 md:h-14 w-auto"
-                />
-              </div>
-
-              <nav className="hidden md:flex items-center gap-8">
-                {navLinks.map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    className={`text-xs uppercase tracking-[0.2em] transition-colors font-medium ${
-                      activeSection === link.href.replace("#", "")
-                        ? "text-[#00c2ff]"
-                        : "text-slate-400 hover:text-[#00c2ff]"
-                    }`}
-                  >
-                    {link.name}
-                  </a>
-                ))}
-                <a
-                  href="#contato"
-                  className={`px-5 py-2 border text-xs uppercase tracking-widest rounded-full transition-all duration-300 ${
-                    activeSection === "contato"
-                      ? "bg-[#00c2ff] text-black border-[#00c2ff]"
-                      : "border-[#00c2ff]/30 text-[#00c2ff] hover:bg-[#00c2ff] hover:text-black"
-                  }`}
-                >
-                  Orçamento
-                </a>
-              </nav>
-
-              <button
-                className="md:hidden text-white p-2"
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-              >
-                <div className="w-6 h-5 relative flex flex-col justify-between">
-                  <span
-                    className={`w-full h-0.5 bg-[#00c2ff] transition-all ${isMenuOpen ? "rotate-45 translate-y-2" : ""}`}
-                  ></span>
-                  <span
-                    className={`w-full h-0.5 bg-[#00c2ff] transition-all ${isMenuOpen ? "opacity-0" : ""}`}
-                  ></span>
-                  <span
-                    className={`w-full h-0.5 bg-[#00c2ff] transition-all ${isMenuOpen ? "-rotate-45 -translate-y-2" : ""}`}
-                  ></span>
-                </div>
-              </button>
-            </div>
-          </header>
+          <Header activeSection={activeSection} />
 
           {/* HERO COM IMAGEM DE FUNDO */}
           <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden">
@@ -224,87 +171,7 @@ export default function App() {
           </section>
 
           {/* SOBRE COM FOTOS DOS SÓCIOS */}
-          <section
-            id="sobre"
-            className="px-6 py-32 bg-[#050a15] border-y border-white/5 scroll-mt-20 overflow-hidden"
-          >
-            <div className="max-w-6xl mx-auto">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-24">
-                <div className="relative group">
-                  <div className="absolute -inset-4 bg-[#00c2ff]/20 blur-xl rounded-2xl opacity-0 group-hover:opacity-100 transition duration-700"></div>
-                  <img
-                    src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=1000"
-                    alt="Design de interior moderno"
-                    className="relative rounded-2xl grayscale hover:grayscale-0 transition duration-700 object-cover h-[400px] w-full shadow-2xl"
-                  />
-                </div>
-                <div className="text-slate-300">
-                  <h2 className="text-4xl font-light mb-8 text-white italic">
-                    Sobre{" "}
-                    <span className="text-[#00c2ff] not-italic font-semibold">
-                      Nós
-                    </span>
-                  </h2>
-                  <p className="leading-relaxed text-lg mb-6">
-                    A LogiCasa nasceu da união entre entusiasmo por tecnologia e
-                    propósito. Somos dois amigos entrosados há 3 décadas que
-                    transformam casas em ambientes inteligentes, funcionais e
-                    elegantes.
-                  </p>
-                  <p className="leading-relaxed border-l-2 border-[#00c2ff] pl-6 py-2 italic text-slate-400">
-                    Atuamos com foco em soluções personalizadas, entendendo que
-                    cada residência é única.
-                  </p>
-                </div>
-              </div>
-
-              {/* CARDS DOS SÓCIOS */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mt-20">
-                {[
-                  {
-                    nome: "Rafael Camargo",
-                    foto: rafa,
-                    bio: "Administrador e entusiasta de tecnologia, principalmente quando aplicada à arquitetura. Com mais de 20 anos de atuação junto a escritórios, indústria e obras, falando a mesma linguagem do projeto e da execução.",
-                  },
-                  {
-                    nome: "Lafaiete Pereira",
-                    foto: lafa,
-                    bio: "Analista de sistemas experiente em desenvolvimento de softwares e explorador de novas tecnologias. Focado em transformar complexidade técnica em conforto para o usuário.",
-                  },
-                ].map((socio) => (
-                  <div
-                    key={socio.nome}
-                    className={`group relative flex flex-col items-center md:flex-row md:items-end gap-6 bg-white/5 p-8 rounded-3xl border border-white/10 hover:border-[#00c2ff]/30 transition-all duration-500 ${socio.nome.includes("Lafaiete") ? "md:flex-row-reverse" : ""}`}
-                  >
-                    {/* Efeito de luz atrás da foto PNG */}
-                    <div
-                      className={`absolute top-10 ${socio.nome.includes("Rafael") ? "left-10" : "right-10"} w-32 h-32 bg-[#00c2ff]/20 blur-[60px] rounded-full group-hover:bg-[#00c2ff]/40 transition-all`}
-                    ></div>
-
-                    <div className="relative w-48 md:w-56 shrink-0">
-                      <img
-                        src={socio.foto}
-                        alt={socio.nome}
-                        className="w-full h-auto drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] group-hover:scale-105 transition-transform duration-500"
-                      />
-                    </div>
-
-                    <div className="relative z-10 text-center md:text-left">
-                      <span className="text-[10px] uppercase tracking-[0.4em] text-[#00c2ff] font-bold">
-                        {socio.nome === "Rafael Camargo" ? "Rafa" : "Lafa"}
-                      </span>
-                      <h3 className="text-3xl font-light text-white mb-4">
-                        {socio.nome}
-                      </h3>
-                      <p className="text-slate-400 text-sm leading-relaxed">
-                        {socio.bio}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
+          <About />
 
           {/* MISSÃO */}
           <section className="px-6 py-24 bg-[#02060f]">
@@ -322,60 +189,7 @@ export default function App() {
           </section>
 
           {/* SERVIÇOS COM CARDS ILUSTRADOS */}
-          <section
-            id="servicos"
-            className="px-6 py-32 bg-[#050a15] border-y border-white/5 scroll-mt-20"
-          >
-            <div className="max-w-6xl mx-auto">
-              <h2 className="text-4xl font-light mb-16 text-center">
-                Nossas{" "}
-                <span className="text-[#00c2ff] font-semibold">Soluções</span>
-              </h2>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {[
-                  {
-                    title: "Automação Residencial",
-                    desc: "Iluminação, climatização e cenas inteligentes integradas ao seu estilo de vida.",
-                    img: "https://images.unsplash.com/photo-1666401565408-9b6b0741f0d6?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-                  },
-                  {
-                    title: "Segurança Inteligente",
-                    desc: "Câmeras, fechaduras digitais e monitoramento remoto com total confiabilidade.",
-                    img: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&q=80&w=600",
-                  },
-                  {
-                    title: "Integrações Personalizadas",
-                    desc: "Integração total com Alexa, Google Home, Apple HomeKit e sistemas sob medida.",
-                    img: "https://www.deltalinkit.com/wp-content/uploads/2023/07/%D8%A8%D8%A7%D8%B1%D8%B2%D8%A9-1536x975.jpg?v=1713965881&auto=format&fit=crop&q=80&w=1000",
-                  },
-                ].map((item) => (
-                  <div
-                    key={item.title}
-                    className="group bg-[#08101f] border border-white/5 rounded-3xl overflow-hidden hover:border-[#00c2ff]/50 transition-all duration-500 shadow-xl"
-                  >
-                    <div className="h-48 overflow-hidden relative">
-                      <div className="absolute inset-0 bg-[#00c2ff]/10 group-hover:bg-transparent transition duration-500 z-10"></div>
-                      <img
-                        src={item.img}
-                        alt={item.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition duration-700"
-                      />
-                    </div>
-                    <div className="p-8">
-                      <div className="w-10 h-1 bg-[#00c2ff] mb-6 group-hover:w-full transition-all duration-500"></div>
-                      <h3 className="text-xl mb-4 font-semibold">
-                        {item.title}
-                      </h3>
-                      <p className="text-slate-400 group-hover:text-slate-200 transition-colors leading-relaxed">
-                        {item.desc}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
+          <Services />
 
           {/* CONTATO (SEM ALTERAÇÕES DE LÓGICA OU TEXTO) */}
           <section
@@ -443,63 +257,7 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="bg-[#050a15] p-8 rounded-3xl border border-white/5 shadow-2xl relative">
-                  <form onSubmit={onSubmit} className="space-y-5">
-                    <input
-                      type="hidden"
-                      name="from_name"
-                      value="Site LogiCasa"
-                    />
-                    <input type="checkbox" name="botcheck" className="hidden" />
-                    <div className="space-y-2">
-                      <label className="text-[10px] uppercase tracking-[0.2em] text-[#00c2ff] font-bold">
-                        Nome Completo
-                      </label>
-                      <input
-                        type="text"
-                        name="name"
-                        required
-                        placeholder="Seu nome"
-                        className="w-full bg-[#08101f] border border-white/10 text-white rounded-xl p-4 outline-none focus:border-[#00c2ff] transition placeholder:text-slate-700"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-[10px] uppercase tracking-[0.2em] text-[#00c2ff] font-bold">
-                        E-mail
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        required
-                        placeholder="seu@email.com"
-                        className="w-full bg-[#08101f] border border-white/10 text-white rounded-xl p-4 outline-none focus:border-[#00c2ff] transition placeholder:text-slate-700"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-[10px] uppercase tracking-[0.2em] text-[#00c2ff] font-bold">
-                        Mensagem
-                      </label>
-                      <textarea
-                        name="message"
-                        rows={4}
-                        required
-                        placeholder="Como podemos ajudar?"
-                        className="w-full bg-[#08101f] border border-white/10 text-white rounded-xl p-4 outline-none focus:border-[#00c2ff] transition resize-none placeholder:text-slate-700"
-                      ></textarea>
-                    </div>
-                    <button
-                      type="submit"
-                      className="w-full bg-[#00c2ff] text-black font-bold py-4 rounded-xl hover:bg-[#00e0ff] hover:scale-[1.01] active:scale-[0.98] transition-all duration-300 uppercase text-xs tracking-widest mt-4 shadow-[0_0_25px_rgba(0,194,255,0.2)]"
-                    >
-                      Enviar Solicitação
-                    </button>
-                    {result && (
-                      <p className="mt-4 text-center text-sm text-[#00c2ff] font-medium animate-pulse">
-                        {result}
-                      </p>
-                    )}
-                  </form>
-                </div>
+                <ContactForm onSubmit={onSubmit} result={result} />
               </div>
             </div>
           </section>
