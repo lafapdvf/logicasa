@@ -41,7 +41,7 @@ export function Services() {
   return (
     <section
       id="servicos"
-      className="px-6 py-32 bg-[#050a15] border-y border-white/5 scroll-mt-20"
+      className="px-6 py-32 bg-[#02060f] border-y border-white/5 scroll-mt-20"
     >
       <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl font-light mb-16 text-center">

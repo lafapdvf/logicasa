@@ -18,7 +18,7 @@ export function About() {
   return (
     <section
       id="sobre"
-      className="px-6 py-32 bg-[#050a15] border-y border-white/5 scroll-mt-20 overflow-hidden"
+      className="px-6 py-32 bg-[#02060f] border-y border-white/5 scroll-mt-20 overflow-hidden"
     >
       <div className="max-w-6xl mx-auto">
         {/* TEXTO DE INTRODUÇÃO */}

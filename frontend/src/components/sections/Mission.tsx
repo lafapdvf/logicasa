@@ -1,6 +1,6 @@
 export function Mission() {
   return (
-    <section className="px-6 py-24 bg-[#02060f]">
+    <section className="px-6 py-24 bg-[#050a15]">
       <div className="max-w-4xl mx-auto text-center">
         <h2 className="text-2xl font-light mb-6 text-slate-400 uppercase tracking-[0.2em]">
           Nossa Missão

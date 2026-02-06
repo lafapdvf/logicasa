@@ -31,7 +31,7 @@ export function Footer() {
 
   return (
     <>
-      <footer className="px-6 py-12 bg-[#02060f] border-t border-white/5">
+      <footer className="px-6 py-12 bg-[#050a15] border-t border-white/5">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
           {/* LOGO E INFOS */}
           <div className="text-slate-600 text-[11px] text-center md:text-left leading-relaxed">
