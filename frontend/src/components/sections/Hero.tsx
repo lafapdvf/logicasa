@@ -1,8 +1,10 @@
 import smarthome from "../../assets/smarthome.webp";
+import logicasa from "../../assets/logicasa.png"; // Certifique-se que o nome do arquivo está correto
 
 export function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden">
+      {/* Background com Imagem e Overlay */}
       <div className="absolute inset-0 z-0">
         <img
           src={smarthome}
@@ -12,25 +14,30 @@ export function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#02060f] via-transparent to-[#02060f]"></div>
       </div>
 
-      <div className="relative z-10">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#00c2ff]/10 blur-[120px] rounded-full -z-10"></div>
-        <h1 className="text-4xl md:text-7xl font-light tracking-wide leading-tight">
-          LogiCasa
-          <br />
-          <span className="font-semibold text-[#00c2ff]">
-            Automação Inteligente
-          </span>
-        </h1>
-        <p className="mt-8 max-w-2xl mx-auto text-slate-400 text-lg md:text-xl font-light">
+      <div className="relative z-10 flex flex-col items-center">
+        {/* Glow de fundo - Aumentei levemente a intensidade para destacar a logo */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-[#00c2ff]/20 blur-[100px] rounded-full -z-10"></div>
+
+        {/* Logo Substituindo o H1 */}
+        <div className="mb-6 transition-transform duration-700 hover:scale-105">
+          <img
+            src={logicasa}
+            alt="LogiCasa Automação Inteligente"
+            className="h-72 md:h-96 w-auto drop-shadow-[0_0_15px_rgba(0,194,255,0.4)]"
+          />
+        </div>
+
+        <p className="mt-4 max-w-2xl mx-auto text-slate-400 text-lg md:text-xl font-light">
           Tecnologia, conforto e sofisticação integrados para residências de
           alto padrão.
         </p>
-        <div className="mt-10">
+
+        <div className="mt-12">
           <a
             href="#servicos"
-            className="animate-bounce inline-block text-[#00c2ff]"
+            className="animate-bounce inline-block text-[#00c2ff] group"
           >
-            <span className="text-[10px] uppercase tracking-[0.3em]">
+            <span className="text-[10px] uppercase tracking-[0.3em] group-hover:text-white transition-colors">
               Descubra
             </span>
             <div className="text-2xl">↓</div>
