@@ -21,14 +21,14 @@ export function ContactForm({ onSubmit, result }: ContactFormProps) {
             type="text"
             name="name"
             required
-            placeholder="Ex: Rafael Camargo"
+            placeholder="Ex: Silvio Santos"
             className="w-full bg-[#08101f] border border-white/10 text-white rounded-xl p-4 outline-none focus:border-[#00c2ff]/50 focus:ring-1 focus:ring-[#00c2ff]/30 transition-all duration-300 placeholder:text-slate-600"
           />
         </div>
 
         <div className="space-y-2">
           <label className="text-[10px] uppercase tracking-[0.2em] text-[#00c2ff] font-bold ml-1">
-            E-mail Profissional
+            E-mail
           </label>
           <input
             type="email"
@@ -41,7 +41,7 @@ export function ContactForm({ onSubmit, result }: ContactFormProps) {
 
         <div className="space-y-2">
           <label className="text-[10px] uppercase tracking-[0.2em] text-[#00c2ff] font-bold ml-1">
-            Sua Mensagem
+            Mensagem
           </label>
           <textarea
             name="message"

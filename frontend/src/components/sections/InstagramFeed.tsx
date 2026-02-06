@@ -21,7 +21,7 @@ export function InstagramFeed() {
       link: "https://www.instagram.com/p/EXEMPLO3",
       thumb: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d",
       metric: "TENDÊNCIA",
-      legenda: "Home Cinema: a experiência definitiva.",
+      legenda: "Cenas e rotinas: a experiência definitiva.",
     },
   ];
 
