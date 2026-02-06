@@ -23,7 +23,7 @@ export function Hero() {
           <img
             src={logicasa}
             alt="LogiCasa Automação Inteligente"
-            className="h-72 md:h-96 w-auto drop-shadow-[0_0_15px_rgba(0,194,255,0.4)]"
+            className="h-48 md:h-96 w-auto drop-shadow-[0_0_15px_rgba(0,194,255,0.4)]"
           />
         </div>
 
