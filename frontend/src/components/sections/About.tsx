@@ -27,7 +27,7 @@ export function About() {
             <div className="absolute -inset-4 bg-[#00c2ff]/20 blur-xl rounded-2xl opacity-0 group-hover:opacity-100 transition duration-700"></div>
             <img
               src="https://i.pinimg.com/1200x/65/db/fe/65dbfe6053b93395a44a55f35679e70c.jpg"
-              alt="Design de interior moderno"
+              alt="Casa inteligente com diversos recursos eletrônicos"
               className="relative rounded-2xl grayscale-[70%] hover:grayscale-0 transition duration-700 object-cover h-[400px] w-full shadow-2xl"
             />
           </div>

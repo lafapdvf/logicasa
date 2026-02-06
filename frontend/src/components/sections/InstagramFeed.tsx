@@ -43,7 +43,7 @@ export function InstagramFeed() {
             </p>
           </div>
           <a
-            href="https://instagram.com/logicasa"
+            href="https://instagram.com/logicasa_automacao"
             target="_blank"
             className="inline-flex items-center gap-3 text-white bg-white/5 border border-white/10 px-6 py-3 rounded-full hover:bg-[#00c2ff]/10 transition-all duration-300"
           >
