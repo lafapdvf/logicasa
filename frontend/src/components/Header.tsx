@@ -8,7 +8,7 @@ interface HeaderProps {
 export function Header({ activeSection: initialActiveSection }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentSection, setCurrentSection] = useState(initialActiveSection);
-  const [isScrolled, setIsScrolled] = useState(false); // Novo estado
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const navLinks = [
     { name: "Sobre", href: "#sobre" },
@@ -16,10 +16,10 @@ export function Header({ activeSection: initialActiveSection }: HeaderProps) {
     { name: "Contato", href: "#contato" },
   ];
 
-  // Detecta scroll para o efeito "discreto"
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      // Ativa o efeito sutil logo no início do scroll
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -65,27 +65,27 @@ export function Header({ activeSection: initialActiveSection }: HeaderProps) {
     <>
       {isMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[90] md:hidden transition-opacity duration-500"
+          className="fixed inset-0 bg-black/60 backdrop-blur-md z-[90] md:hidden transition-opacity duration-500"
           onClick={closeMenu}
         />
       )}
 
       <header
-        className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ease-in-out
+        className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-700 ease-in-out
           ${
             isScrolled
-              ? "bg-[#02060f]/95 backdrop-blur-lg border-b border-white/5 h-20"
+              ? "bg-[#02060f]/40 backdrop-blur-md border-b border-white/5 h-20"
               : "bg-transparent h-24 border-b border-transparent"
           } 
         `}
       >
         <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
-          {/* LOGO - Mais discreta no topo */}
+          {/* LOGO - Agora com transição de opacidade mais suave */}
           <div
-            className={`flex items-center cursor-pointer transition-all duration-500 ${
+            className={`flex items-center cursor-pointer transition-all duration-700 ${
               !isScrolled
-                ? "opacity-40 scale-90 grayscale"
-                : "opacity-100 scale-100"
+                ? "opacity-30 scale-90 grayscale blur-[1px]"
+                : "opacity-100 scale-100 blur-0"
             }`}
             onClick={scrollToTop}
           >
@@ -97,15 +97,15 @@ export function Header({ activeSection: initialActiveSection }: HeaderProps) {
           </div>
 
           {/* DESKTOP NAV */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center gap-10">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className={`text-xs uppercase tracking-[0.2em] transition-all duration-300 font-medium ${
+                className={`text-[11px] uppercase tracking-[0.25em] transition-all duration-500 font-medium ${
                   isActive(link.href)
-                    ? "text-[#00c2ff]"
-                    : `${isScrolled ? "text-slate-400" : "text-slate-500"} hover:text-[#00c2ff]`
+                    ? "text-[#00c2ff] drop-shadow-[0_0_8px_rgba(0,194,255,0.5)]"
+                    : `${isScrolled ? "text-slate-200" : "text-slate-400"} hover:text-[#00c2ff]`
                 }`}
               >
                 {link.name}
@@ -120,39 +120,37 @@ export function Header({ activeSection: initialActiveSection }: HeaderProps) {
           >
             <div className="w-6 h-5 relative flex flex-col justify-between">
               <span
-                className={`w-full h-0.5 bg-current transition-all duration-300 ${isMenuOpen ? "rotate-45 translate-y-2.5" : ""}`}
+                className={`w-full h-0.5 bg-current transition-all duration-500 ${isMenuOpen ? "rotate-45 translate-y-2.5" : ""}`}
               ></span>
               <span
-                className={`w-full h-0.5 bg-current transition-all duration-300 ${isMenuOpen ? "opacity-0" : ""}`}
+                className={`w-full h-0.5 bg-current transition-all duration-500 ${isMenuOpen ? "opacity-0" : ""}`}
               ></span>
               <span
-                className={`w-full h-0.5 bg-current transition-all duration-300 ${isMenuOpen ? "-rotate-45 -translate-y-2.5" : ""}`}
+                className={`w-full h-0.5 bg-current transition-all duration-500 ${isMenuOpen ? "-rotate-45 -translate-y-2.5" : ""}`}
               ></span>
             </div>
           </button>
         </div>
 
-        {/* MOBILE MENU OVERLAY */}
+        {/* MOBILE MENU OVERLAY - Super escuro para dar contraste */}
         <div
-          className={`fixed inset-x-0 top-0 bg-[#02060f]/98 backdrop-blur-2xl border-b border-white/10 transition-all duration-500 ease-in-out md:hidden overflow-hidden ${
-            isMenuOpen ? "max-h-screen opacity-100 py-24" : "max-h-0 opacity-0"
+          className={`fixed inset-x-0 top-0 bg-[#02060f]/95 backdrop-blur-3xl transition-all duration-700 ease-in-out md:hidden overflow-hidden ${
+            isMenuOpen ? "h-screen opacity-100 py-32" : "h-0 opacity-0"
           }`}
         >
-          <nav className="flex flex-col items-center gap-8">
+          <nav className="flex flex-col items-center gap-12">
             {navLinks.map((link, index) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={closeMenu}
                 style={{
-                  transitionDelay: isMenuOpen
-                    ? `${(index + 1) * 100}ms`
-                    : "0ms",
+                  transitionDelay: isMenuOpen ? `${(index + 1) * 70}ms` : "0ms",
                 }}
-                className={`text-xl uppercase tracking-[0.3em] transition-all duration-500 ${
+                className={`text-2xl uppercase tracking-[0.4em] transition-all duration-500 ${
                   isActive(link.href)
                     ? "text-[#00c2ff] font-bold"
-                    : "text-white/80"
+                    : "text-white/60 hover:text-white"
                 }`}
               >
                 {link.name}
