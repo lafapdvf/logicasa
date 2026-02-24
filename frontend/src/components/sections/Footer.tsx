@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ChevronUp, X } from "lucide-react"; // Aproveitando que já instalamos o lucide
+import { ChevronUp, X } from "lucide-react";
 
 export function Footer() {
   const [modalContent, setModalContent] = useState<
@@ -38,8 +38,8 @@ export function Footer() {
             <p className="mb-1 uppercase tracking-widest font-semibold text-slate-400">
               © {new Date().getFullYear()} LogiCasa
             </p>
-            <p>Automação Inteligente. Todos os direitos reservados.</p>
-            <p className="opacity-50 mt-1">CNPJ: 00.000.000/0001-00</p>
+            <p>Todos os direitos reservados.</p>
+            <p>São Paulo - SP - Brasil</p>
           </div>
 
           {/* LINKS LEGAIS */}

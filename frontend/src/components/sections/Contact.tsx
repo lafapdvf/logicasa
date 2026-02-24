@@ -18,9 +18,13 @@ export function Contact({ onSubmit, result }: ContactSectionProps) {
                 Conversar?
               </span>
             </h2>
+            <p className="text-slate-400 text-lg">
+              Pronto para transformar sua casa? Será um prazer desenvolvermos
+              uma solução exclusiva para você.
+            </p>
             <p className="text-slate-400 text-lg mb-8">
-              Pronto para transformar sua casa? Será um prazer desenharmos um
-              projeto exclusivo para você.
+              Entre em contato através de um dos nossos canais ou preencha o
+              formulário ao lado. Estamos ansiosos para ouvir suas ideias!
             </p>
 
             <div className="space-y-8">
