@@ -27,7 +27,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     defaults:
       run:
@@ -51,6 +51,7 @@ jobs:
         run: npm run build
         env:
           VITE_WEB3FORMS_KEY: ${{ secrets.VITE_WEB3FORMS_KEY }}
+          VITE_GTM_ID: ${{ secrets.VITE_GTM_ID }}
         
       - name: Setup Pages
         uses: actions/configure-pages@v5
