@@ -19,22 +19,22 @@ export function Services() {
     },
     {
       title: "Integrações Personalizadas",
-      desc: "Integração total com Alexa, Google Home e outros sistemas sob medida.",
+      desc: "Focadas em você, na sua rotina pessoal e no seu lar, para que tudo funcione como você deseja.",
       img: "https://www.deltalinkit.com/wp-content/uploads/2023/07/%D8%A8%D8%A7%D8%B1%D8%B2%D8%A9-1536x975.jpg?v=1713965881&auto=format&fit=crop&q=80&w=1000",
     },
     {
       title: "Áudio & Vídeo Imersivos",
-      desc: "Sistemas de áudio e vídeo para entretenimento, como Home Theaters, Home Cinemas e multirooms.",
+      desc: "Home Theaters, Home Cinemas e multirooms integrados à sua automação residencial.",
       img: "https://images.unsplash.com/photo-1721733258410-35e699661ad6?q=80&w=1170&auto=format&fit=crop",
     },
     {
       title: "Paineis & Displays de LED",
-      desc: "Paineis de LED e displays personalizados para ambientes residenciais e comerciais.",
+      desc: "Seja em ambientes residenciais ou comerciais, é a sua garantia de diversão e casa cheia na Copa do Mundo.",
       img: "https://i.pinimg.com/736x/77/fa/d0/77fad0c49d4eeafdce8a1d0e30647bda.jpg",
     },
     {
       title: "Soluções de Acessibilidade",
-      desc: "Para assegurar que todos possam desfrutar do conforto que a tecnologia oferece de forma simplificada e inclusiva.",
+      desc: "Para que todos possam desfrutar do conforto que uma casa inteligente oferece de forma simplificada e inclusiva.",
       img: "https://i.pinimg.com/1200x/20/10/b6/2010b6687cde14c819718f1bd4526ec5.jpg",
     },
   ];

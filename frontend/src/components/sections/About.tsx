@@ -42,15 +42,23 @@ export function About() {
                 Nós
               </span>
             </h2>
-            <p className="leading-relaxed text-base md:text-lg mb-6">
-              A LogiCasa nasceu da união entre entusiasmo por tecnologia e
-              propósito. Atuamos com foco em soluções personalizadas, entendendo
-              que cada residência é única e demanda peculiaridades.
+            <p className="leading-relaxed text-base md:text-lg mb-3">
+              Uma casa inteligente é aquela que se adapta ao estilo de vida dos
+              moradores e torna suas vidas mais confortáveis, fazendo com que se
+              procupem apenas com o que mais importa: aproveitarem o conforto do
+              lar.
             </p>
+            <p className="leading-relaxed text-base md:text-lg mb-6">
+              A LogiCasa nasceu do entusiasmo pelo conforto que a tecnologia
+              pode trazer à vida e da curiosidade em como maximizar esse
+              conforto sem sacrificar a simplicidade e a acessibilidade.
+            </p>
+
             <p className="leading-relaxed border-l-2 border-[#00c2ff] pl-6 py-2 italic text-slate-400 text-sm md:text-base">
-              Somos dois amigos entrosados há 3 décadas que uniram experiências
-              e conhecimentos para transformar residências em ambientes
-              inteligentes, funcionais e de alto valor.
+              Somos dois melhores amigos que uniram experiências e conhecimentos
+              para transformar residências em ambientes inteligentes, funcionais
+              e fáceis de usar. Entendemos que cada indivíduo tem sua própria
+              personalidade e que o seu lar é a extensão dela.
             </p>
           </div>
         </div>

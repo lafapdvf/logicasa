@@ -1,5 +1,5 @@
 import smarthome from "../../assets/smarthome.webp";
-import logicasa from "../../assets/logicasa.png"; // Certifique-se que o nome do arquivo está correto
+import logicasa from "../../assets/logicasa.png";
 
 export function Hero() {
   return (
@@ -15,10 +15,10 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 flex flex-col items-center">
-        {/* Glow de fundo - Aumentei levemente a intensidade para destacar a logo */}
+        {/* Glow de fundo da logo */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-[#00c2ff]/20 blur-[100px] rounded-full -z-10"></div>
 
-        {/* Logo Substituindo o H1 */}
+        {/* Logo */}
         <div className="mb-6 transition-transform duration-700 hover:scale-105">
           <img
             src={logicasa}
@@ -28,8 +28,8 @@ export function Hero() {
         </div>
 
         <p className="mt-4 max-w-2xl mx-auto text-slate-400 text-lg md:text-xl font-light">
-          Tecnologia, conforto e sofisticação integrados para residências de
-          alto padrão.
+          Sofisticação e conforto de alto padrão para todos os padrões de
+          residências.
         </p>
 
         <div className="mt-12">
@@ -38,7 +38,7 @@ export function Hero() {
             className="animate-bounce inline-block text-[#00c2ff] group"
           >
             <span className="text-[10px] uppercase tracking-[0.3em] group-hover:text-white transition-colors">
-              Descubra
+              Veja mais
             </span>
             <div className="text-2xl">↓</div>
           </a>

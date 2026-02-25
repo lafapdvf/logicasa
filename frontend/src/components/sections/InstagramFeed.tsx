@@ -4,21 +4,21 @@ export function InstagramFeed() {
   const posts = [
     {
       id: 1,
-      link: "https://www.instagram.com/p/EXEMPLO1",
+      link: "https://www.instagram.com/logicasa_automacao/EXEMPLO1",
       thumb: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c",
       metric: "MAIS VISTO",
       legenda: "Automação completa em cobertura duplex.",
     },
     {
       id: 2,
-      link: "https://www.instagram.com/p/EXEMPLO2",
+      link: "https://www.instagram.com/logicasa_automacao/EXEMPLO2",
       thumb: "https://images.unsplash.com/photo-1558603668-6570496b66f8",
       metric: "DESTAQUE",
       legenda: "Iluminação inteligente e conforto térmico.",
     },
     {
       id: 3,
-      link: "https://www.instagram.com/p/EXEMPLO3",
+      link: "https://www.instagram.com/logicasa_automacao/EXEMPLO3",
       thumb: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d",
       metric: "TENDÊNCIA",
       legenda: "Cenas e rotinas: a experiência definitiva.",
@@ -38,7 +38,7 @@ export function InstagramFeed() {
               </span>
             </h2>
             <p className="text-slate-400 leading-relaxed">
-              Curadoria dos nossos posts com maior impacto e engajamento no
+              Alguns dos nossos posts com maior impacto e engajamento no
               Instagram.
             </p>
           </div>
@@ -49,7 +49,7 @@ export function InstagramFeed() {
           >
             <Instagram className="w-5 h-5 text-[#00c2ff]" />
             <span className="text-sm font-bold tracking-widest uppercase">
-              Seguir LogiCasa
+              Seguir a LogiCasa
             </span>
           </a>
         </div>
