@@ -9,17 +9,17 @@ export function Services() {
     // ... (seus itens de serviço permanecem os mesmos)
     {
       title: "Automação Residencial",
-      desc: "Iluminação, climatização, jardinagem, área pet e outras cenas e rotinas inteligentes integradas ao seu estilo de vida.",
+      desc: "Desde a iluminação até a irrigação das plantas ou a alimentação do seu pet, tudo ao seu total alcance e controle.",
       img: "https://images.unsplash.com/photo-1666401565408-9b6b0741f0d6?q=80&w=1171&auto=format&fit=crop",
     },
     {
       title: "Segurança Inteligente",
-      desc: "Câmeras, fechaduras digitais, controles de acesso individualizados e monitoramento remoto com total confiabilidade.",
+      desc: "Controles de acesso individualizados, monitoramento de ambientes e proteção contra quaisquer riscos.",
       img: "https://images.unsplash.com/photo-1557597774-9d273605dfa9?auto=format&fit=crop&q=80&w=600",
     },
     {
       title: "Integrações Personalizadas",
-      desc: "Focadas em você, na sua rotina pessoal e no seu lar, para que tudo funcione como você deseja.",
+      desc: "Criatividade ilimitada focada nas suas necessidades, nas suas rotinas e no seu conforto.",
       img: "https://www.deltalinkit.com/wp-content/uploads/2023/07/%D8%A8%D8%A7%D8%B1%D8%B2%D8%A9-1536x975.jpg?v=1713965881&auto=format&fit=crop&q=80&w=1000",
     },
     {
