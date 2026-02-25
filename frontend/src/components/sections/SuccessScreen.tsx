@@ -1,8 +1,21 @@
+import { useEffect } from "react";
+import TagManager from "react-gtm-module";
+
 interface SuccessScreenProps {
   onBack: () => void;
 }
 
 export function SuccessScreen({ onBack }: SuccessScreenProps) {
+  useEffect(() => {
+    // Disparo adicional para garantir a visualização da tela de sucesso (opcional)
+    TagManager.dataLayer({
+      dataLayer: {
+        event: "page_view_success",
+        pagePath: "/success-screen",
+      },
+    });
+  }, []);
+
   return (
     <section className="min-h-screen flex flex-col items-center justify-center px-6 text-center bg-[#02060f] relative overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#00c2ff]/10 blur-[120px] rounded-full -z-10"></div>
@@ -10,8 +23,7 @@ export function SuccessScreen({ onBack }: SuccessScreenProps) {
         <span className="text-4xl">✅</span>
       </div>
       <h1 className="text-4xl md:text-5xl font-light mb-6">
-        Proposta{" "}
-        <span className="text-[#00c2ff] font-semibold">Solicitada!</span>
+        Mensagem <span className="text-[#00c2ff] font-semibold">Enviada!</span>
       </h1>
       <p className="text-slate-400 text-lg max-w-xl mb-10 leading-relaxed">
         Obrigado por escolher a <strong>LogiCasa</strong>. Já recebemos seus

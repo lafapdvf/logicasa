@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import TagManager from "react-gtm-module";
 
 interface ContactFormProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -32,6 +33,15 @@ export function ContactForm({ onSubmit, result }: ContactFormProps) {
       console.warn("Spam detectado.");
       return;
     }
+
+    // Disparo do evento de conversão para o GTM
+    TagManager.dataLayer({
+      dataLayer: {
+        event: "generate_lead",
+        formId: "contato_logicasa",
+        formName: "Formulário de Contato",
+      },
+    });
 
     onSubmit(event);
   };
