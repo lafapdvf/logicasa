@@ -22,6 +22,20 @@ export function ContactForm({ onSubmit, result }: ContactFormProps) {
 
   const [isFormValid, setIsFormValid] = useState(false);
 
+  // Validação interna do Honeypot antes de prosseguir com o onSubmit original
+  const handleInternalSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const isBot = data.get("botcheck") === "on";
+
+    if (isBot) {
+      console.warn("Spam detectado.");
+      return;
+    }
+
+    onSubmit(event);
+  };
+
   const maskPhone = (value: string) => {
     return value
       .replace(/\D/g, "")
@@ -49,7 +63,6 @@ export function ContactForm({ onSubmit, result }: ContactFormProps) {
   // --- VALIDAÇÕES ---
   const isNameValid = formData.name.trim().length >= 3;
 
-  // Novo Regex: Garante caracteres antes do @, domínio e extensão de pelo menos 2 letras sem ponto final
   const isEmailValid =
     /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email) &&
     !formData.email.endsWith(".");
@@ -60,7 +73,6 @@ export function ContactForm({ onSubmit, result }: ContactFormProps) {
   const hasContactMethod = isEmailValid || isPhoneValid;
 
   useEffect(() => {
-    // Se todos os campos forem apagados, reseta os avisos de erro (UX de "desistência")
     const isFormEmpty = Object.values(formData).every(
       (val) => val.trim() === "",
     );
@@ -81,9 +93,15 @@ export function ContactForm({ onSubmit, result }: ContactFormProps) {
     <div className="bg-[#050a15] p-8 rounded-3xl border border-white/5 shadow-2xl relative group">
       <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#00c2ff]/5 blur-[80px] rounded-full pointer-events-none"></div>
 
-      <form onSubmit={onSubmit} className="space-y-5 relative z-10">
+      <form onSubmit={handleInternalSubmit} className="space-y-5 relative z-10">
         <input type="hidden" name="from_name" value="Site LogiCasa" />
-        <input type="checkbox" name="botcheck" className="hidden" />
+        <input
+          type="checkbox"
+          name="botcheck"
+          className="hidden"
+          tabIndex={-1}
+          autoComplete="off"
+        />
 
         {/* Nome Completo */}
         <div className="space-y-2">
@@ -184,10 +202,22 @@ export function ContactForm({ onSubmit, result }: ContactFormProps) {
                 : "bg-slate-800 text-slate-500 cursor-not-allowed opacity-50"
             }`}
         >
-          Enviar Solicitação
+          {isFormValid ? "Enviar Solicitação" : "Preencha os Campos Acima"}
         </button>
 
         <style>{`
+          /* Remove o fundo branco/azul do preenchimento automático */
+          input:-webkit-autofill,
+          input:-webkit-autofill:hover, 
+          input:-webkit-autofill:focus,
+          textarea:-webkit-autofill,
+          textarea:-webkit-autofill:hover,
+          textarea:-webkit-autofill:focus {
+            -webkit-text-fill-color: white !important;
+            -webkit-box-shadow: 0 0 0px 1000px #08101f inset !important;
+            transition: background-color 5000s ease-in-out 0s;
+          }
+
           @keyframes shake {
             10%, 90% { transform: translate3d(-1px, 0, 0); }
             20%, 80% { transform: translate3d(2px, 0, 0); }
