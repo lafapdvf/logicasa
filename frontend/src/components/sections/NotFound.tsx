@@ -29,7 +29,7 @@ export function NotFound({ onBack }: NotFoundProps) {
         onClick={onBack}
         className="group relative flex items-center gap-2 overflow-hidden rounded-full bg-transparent border-2 border-[#00c2ff] px-8 py-3 font-bold text-[#00c2ff] transition-all duration-300 hover:bg-[#00c2ff] hover:text-black active:scale-95"
       >
-        <Home className="h-5 w-5 transition-transform group-hover:-translate-y-1" />
+        <Home className="h-5 w-5" />
         <span>Voltar para o Início</span>
 
         {/* Efeito de brilho no hover */}
