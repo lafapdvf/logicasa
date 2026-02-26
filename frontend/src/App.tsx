@@ -8,14 +8,20 @@ import { InstagramFeed } from "./components/sections/InstagramFeed";
 import { Contact } from "./components/sections/Contact";
 import { Footer } from "./components/sections/Footer";
 import { SuccessScreen } from "./components/sections/SuccessScreen";
+import { NotFound } from "./components/sections/NotFound";
 
 export default function App() {
   const [result, setResult] = useState("");
   const [activeSection, setActiveSection] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isNotFound, setIsNotFound] = useState(false);
 
-  // Lógica de Scroll Spy (Intersection Observer)
+  // Lógica de Detecção de Rota e Scroll Spy
   useEffect(() => {
+    if (window.location.pathname !== "/" && window.location.pathname !== "") {
+      setIsNotFound(true);
+    }
+
     const sections = ["sobre", "servicos", "contato"];
     const observers = new IntersectionObserver(
       (entries) => {
@@ -37,15 +43,22 @@ export default function App() {
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setResult("Enviando...");
-    // ... sua lógica de fetch do Web3Forms aqui ...
     setIsSubmitted(true);
     window.scrollTo(0, 0);
   };
 
+  const handleBackToHome = () => {
+    window.history.pushState({}, "", "/");
+    setIsNotFound(false);
+    setIsSubmitted(false);
+  };
+
   return (
     <div className="min-h-screen bg-[#02060f] text-white font-sans selection:bg-[#00c2ff] selection:text-black">
-      {isSubmitted ? (
-        <SuccessScreen onBack={() => setIsSubmitted(false)} />
+      {isNotFound ? (
+        <NotFound onBack={handleBackToHome} />
+      ) : isSubmitted ? (
+        <SuccessScreen onBack={handleBackToHome} />
       ) : (
         <>
           <Header activeSection={activeSection} />
