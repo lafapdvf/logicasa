@@ -27,6 +27,11 @@ export function Footer() {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+    window.history.pushState(
+      "",
+      document.title,
+      window.location.pathname + window.location.search,
+    );
   };
 
   return (

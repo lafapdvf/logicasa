@@ -11,14 +11,13 @@ export function Header({ activeSection: initialActiveSection }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const navLinks = [
-    { name: "Soluções", href: "#solucoes" },
-    { name: "Sobre", href: "#sobre" },
-    { name: "Contato", href: "#contato" },
+    { name: "Soluções", id: "solucoes" },
+    { name: "Sobre", id: "sobre" },
+    { name: "Contato", id: "contato" },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
-      // Ativa o efeito sutil logo no início do scroll
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
@@ -43,7 +42,7 @@ export function Header({ activeSection: initialActiveSection }: HeaderProps) {
     const observer = new IntersectionObserver(handleIntersect, observerOptions);
 
     navLinks.forEach((link) => {
-      const element = document.querySelector(link.href);
+      const element = document.getElementById(link.id);
       if (element) {
         observer.observe(element);
       }
@@ -52,14 +51,34 @@ export function Header({ activeSection: initialActiveSection }: HeaderProps) {
     return () => observer.disconnect();
   }, []);
 
+  const handleNavClick = (e: React.MouseEvent, id: string) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      // Limpa a URL removendo o hash
+      window.history.pushState(
+        "",
+        document.title,
+        window.location.pathname + window.location.search,
+      );
+    }
+    closeMenu();
+  };
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+    window.history.pushState(
+      "",
+      document.title,
+      window.location.pathname + window.location.search,
+    );
     closeMenu();
   };
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
   const closeMenu = () => setIsMenuOpen(false);
-  const isActive = (href: string) => href.replace("#", "") === currentSection;
+  const isActive = (id: string) => id === currentSection;
 
   return (
     <>
@@ -80,7 +99,6 @@ export function Header({ activeSection: initialActiveSection }: HeaderProps) {
         `}
       >
         <div className="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
-          {/* LOGO - Agora com transição de opacidade mais suave */}
           <div
             className={`flex items-center cursor-pointer transition-all duration-700 ${
               !isScrolled
@@ -96,14 +114,14 @@ export function Header({ activeSection: initialActiveSection }: HeaderProps) {
             />
           </div>
 
-          {/* DESKTOP NAV */}
           <nav className="hidden md:flex items-center gap-10">
             {navLinks.map((link) => (
               <a
                 key={link.name}
-                href={link.href}
+                href={`#${link.id}`}
+                onClick={(e) => handleNavClick(e, link.id)}
                 className={`text-[11px] uppercase tracking-[0.25em] transition-all duration-500 font-medium ${
-                  isActive(link.href)
+                  isActive(link.id)
                     ? "text-[#00c2ff] drop-shadow-[0_0_8px_rgba(0,194,255,0.5)]"
                     : `${isScrolled ? "text-slate-200" : "text-slate-400"} hover:text-[#00c2ff]`
                 }`}
@@ -113,7 +131,6 @@ export function Header({ activeSection: initialActiveSection }: HeaderProps) {
             ))}
           </nav>
 
-          {/* MOBILE TOGGLE BUTTON */}
           <button
             className={`md:hidden p-2 z-[110] transition-colors ${isScrolled ? "text-[#00c2ff]" : "text-slate-400"}`}
             onClick={toggleMenu}
@@ -132,7 +149,6 @@ export function Header({ activeSection: initialActiveSection }: HeaderProps) {
           </button>
         </div>
 
-        {/* MOBILE MENU OVERLAY - Super escuro para dar contraste */}
         <div
           className={`fixed inset-x-0 top-0 bg-[#02060f]/95 backdrop-blur-3xl transition-all duration-700 ease-in-out md:hidden overflow-hidden ${
             isMenuOpen ? "h-screen opacity-100 py-32" : "h-0 opacity-0"
@@ -142,13 +158,13 @@ export function Header({ activeSection: initialActiveSection }: HeaderProps) {
             {navLinks.map((link, index) => (
               <a
                 key={link.name}
-                href={link.href}
-                onClick={closeMenu}
+                href={`#${link.id}`}
+                onClick={(e) => handleNavClick(e, link.id)}
                 style={{
                   transitionDelay: isMenuOpen ? `${(index + 1) * 70}ms` : "0ms",
                 }}
                 className={`text-2xl uppercase tracking-[0.4em] transition-all duration-500 ${
-                  isActive(link.href)
+                  isActive(link.id)
                     ? "text-[#00c2ff] font-bold"
                     : "text-white/60 hover:text-white"
                 }`}
