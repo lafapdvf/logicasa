@@ -40,17 +40,42 @@ export default function App() {
     return () => observers.disconnect();
   }, []);
 
+  // FUNÇÃO DE SUBMISSÃO ATUALIZADA
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setResult("Enviando...");
-    setIsSubmitted(true);
-    window.scrollTo(0, 0);
+
+    // Captura os dados do formulário (incluindo a access_key que está no ContactForm)
+    const formData = new FormData(event.currentTarget);
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setResult("Mensagem enviada com sucesso!");
+        setIsSubmitted(true);
+        window.scrollTo(0, 0);
+      } else {
+        // Caso a chave esteja errada ou a API retorne erro
+        setResult(data.message || "Erro ao enviar formulário.");
+        console.error("Erro Web3Forms:", data);
+      }
+    } catch (error) {
+      setResult("Erro de conexão. Verifique sua internet.");
+      console.error("Erro na requisição:", error);
+    }
   };
 
   const handleBackToHome = () => {
     window.history.pushState({}, "", "/");
     setIsNotFound(false);
     setIsSubmitted(false);
+    setResult(""); // Limpa o status para um novo envio
   };
 
   return (
