@@ -38,17 +38,20 @@ export function Footer() {
     <>
       <footer className="px-6 py-12 bg-[#050a15] border-t border-white/5">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-          {/* LOGO E INFOS */}
-          <div className="text-slate-600 text-[11px] text-center md:text-left leading-relaxed">
+          {/* LOGO E INFOS - Otimizado para SEO Local */}
+          <address className="text-slate-600 text-[11px] text-center md:text-left leading-relaxed not-italic">
             <p className="mb-1 uppercase tracking-widest font-semibold text-slate-400">
               © {new Date().getFullYear()} LogiCasa
             </p>
             <p>Todos os direitos reservados.</p>
             <p>São Paulo - SP - Brasil</p>
-          </div>
+          </address>
 
-          {/* LINKS LEGAIS */}
-          <div className="flex gap-10 text-[10px] uppercase tracking-[0.2em] font-bold">
+          {/* LINKS LEGAIS - Otimizado com navegação semântica */}
+          <nav
+            aria-label="Links institucionais"
+            className="flex gap-10 text-[10px] uppercase tracking-[0.2em] font-bold"
+          >
             <button
               onClick={() => setModalContent("privacidade")}
               className="text-slate-500 hover:text-[#00c2ff] transition-colors duration-300"
@@ -61,11 +64,11 @@ export function Footer() {
             >
               Termos de Uso
             </button>
-          </div>
+          </nav>
         </div>
       </footer>
 
-      {/* BOTÃO FLUTUANTE VOLTAR AO TOPO (Efeito ContactForm) */}
+      {/* BOTÃO FLUTUANTE VOLTAR AO TOPO */}
       <button
         onClick={scrollToTop}
         className={`fixed bottom-8 right-8 z-[120] p-4 bg-[#00c2ff] text-black rounded-full shadow-[0_0_20px_rgba(0,194,255,0.2)] transition-all duration-500 hover:bg-[#00e0ff] hover:scale-110 hover:shadow-[#00c2ff]/50 active:scale-95 flex items-center justify-center ${
@@ -73,25 +76,30 @@ export function Footer() {
             ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-10 pointer-events-none"
         }`}
-        aria-label="Voltar ao topo"
+        aria-label="Voltar ao topo da página"
       >
-        <ChevronUp size={24} strokeWidth={3} />
+        <ChevronUp size={24} strokeWidth={3} aria-hidden="true" />
       </button>
 
       {/* MODAL LGPD */}
       {modalContent && (
-        <div className="fixed inset-0 z-[150] bg-black/95 backdrop-blur-md flex items-center justify-center p-6 animate-in fade-in duration-300">
+        <div
+          className="fixed inset-0 z-[150] bg-black/95 backdrop-blur-md flex items-center justify-center p-6 animate-in fade-in duration-300"
+          role="dialog"
+          aria-modal="true"
+        >
           <div className="bg-[#050a15] border border-white/10 w-full max-w-2xl max-h-[80vh] overflow-y-auto rounded-3xl p-8 md:p-12 relative shadow-2xl">
             <button
               onClick={() => setModalContent(null)}
               className="absolute top-6 right-6 text-slate-500 hover:text-[#00c2ff] transition-colors"
+              aria-label="Fechar modal"
             >
-              <X size={24} />
+              <X size={24} aria-hidden="true" />
             </button>
 
             <div className="prose prose-invert max-w-none">
               {modalContent === "privacidade" ? (
-                <>
+                <article>
                   <h2 className="text-[#00c2ff] text-2xl mb-6 font-light italic">
                     Política de{" "}
                     <span className="not-italic font-semibold">
@@ -111,9 +119,9 @@ export function Footer() {
                     13.709/2018). Não compartilhamos informações com terceiros
                     ou as utilizamos para fins de spam.
                   </p>
-                </>
+                </article>
               ) : (
-                <>
+                <article>
                   <h2 className="text-[#00c2ff] text-2xl mb-6 font-light italic">
                     Termos de{" "}
                     <span className="not-italic font-semibold">Uso</span>
@@ -123,7 +131,7 @@ export function Footer() {
                     site são de propriedade intelectual da LogiCasa ou de seus
                     parceiros. A reprodução sem autorização é proibida.
                   </p>
-                </>
+                </article>
               )}
             </div>
           </div>
@@ -132,7 +140,10 @@ export function Footer() {
 
       {/* BANNER DE COOKIES */}
       {showCookieBanner && (
-        <div className="fixed bottom-6 left-6 right-6 z-[100] animate-in slide-in-from-bottom-10 duration-700">
+        <aside
+          className="fixed bottom-6 left-6 right-6 z-[100] animate-in slide-in-from-bottom-10 duration-700"
+          aria-label="Aviso de cookies"
+        >
           <div className="max-w-4xl mx-auto bg-[#08101f]/95 backdrop-blur-xl border border-white/10 p-6 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex-1">
               <h4 className="text-[#00c2ff] text-xs font-black uppercase tracking-[0.2em] mb-2">
@@ -156,7 +167,7 @@ export function Footer() {
               Aceitar
             </button>
           </div>
-        </div>
+        </aside>
       )}
     </>
   );

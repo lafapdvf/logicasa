@@ -1,12 +1,11 @@
-interface ServiceItem {
+interface SolutionItem {
   title: string;
   desc: string;
   img: string;
 }
 
-export function Services() {
-  const services: ServiceItem[] = [
-    // ... (seus itens de serviço permanecem os mesmos)
+export function Solutions() {
+  const solutions: SolutionItem[] = [
     {
       title: "Automação Residencial",
       desc: "Desde a iluminação até a irrigação das plantas ou a alimentação do seu pet, tudo ao seu total alcance e controle.",
@@ -42,18 +41,20 @@ export function Services() {
   return (
     <section
       id="solucoes"
-      /* AJUSTE AQUI: scroll-mt deve bater com a altura do header. 
-         Reduzi o padding superior (pt) e mantive o inferior (pb) para o respiro. */
       className="px-6 pt-16 pb-24 md:pt-24 md:pb-32 bg-[#02060f] border-y border-white/5 scroll-mt-5"
+      aria-labelledby="solutions-title"
     >
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-5xl font-light mb-12 md:mb-20 text-center tracking-tight">
+        <h2
+          id="solutions-title"
+          className="text-3xl md:text-5xl font-light mb-12 md:mb-20 text-center tracking-tight"
+        >
           Nossas <span className="text-[#00c2ff] font-semibold">Soluções</span>
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {services.map((item) => (
-            <div
+          {solutions.map((item) => (
+            <article
               key={item.title}
               className="group bg-[#08101f] border border-white/5 rounded-3xl overflow-hidden hover:border-[#00c2ff]/50 transition-all duration-500 shadow-xl"
             >
@@ -61,12 +62,16 @@ export function Services() {
                 <div className="absolute inset-0 bg-[#00c2ff]/5 group-hover:bg-transparent transition duration-500 z-10"></div>
                 <img
                   src={item.img}
-                  alt={item.title}
+                  alt={`Solução de ${item.title} - LogiCasa`}
                   className="w-full h-full object-cover group-hover:scale-110 transition duration-700 opacity-80 group-hover:opacity-100"
+                  loading="lazy"
                 />
               </div>
               <div className="p-8">
-                <div className="w-8 h-1 bg-[#00c2ff] mb-6 group-hover:w-full transition-all duration-500"></div>
+                <div
+                  className="w-8 h-1 bg-[#00c2ff] mb-6 group-hover:w-full transition-all duration-500"
+                  aria-hidden="true"
+                ></div>
                 <h3 className="text-xl mb-3 font-semibold text-white">
                   {item.title}
                 </h3>
@@ -74,7 +79,7 @@ export function Services() {
                   {item.desc}
                 </p>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Header } from "./components/Header";
 import { Hero } from "./components/sections/Hero";
-import { Services } from "./components/sections/Services";
+import { Solutions } from "./components/sections/Solutions";
 import { Mission } from "./components/sections/Mission";
 import { About } from "./components/sections/About";
 import { InstagramFeed } from "./components/sections/InstagramFeed";
@@ -22,7 +22,7 @@ export default function App() {
       setIsNotFound(true);
     }
 
-    const sections = ["sobre", "servicos", "contato"];
+    const sections = ["solucoes", "sobre", "contato"];
     const observers = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -40,7 +40,6 @@ export default function App() {
     return () => observers.disconnect();
   }, []);
 
-  // FUNÇÃO DE SUBMISSÃO ATUALIZADA
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setResult("Enviando...");
@@ -89,7 +88,7 @@ export default function App() {
           <Header activeSection={activeSection} />
           <main>
             <Hero />
-            <Services />
+            <Solutions />
             <Mission />
             <About />
             <InstagramFeed />

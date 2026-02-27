@@ -18,25 +18,27 @@ export function About() {
   return (
     <section
       id="sobre"
-      /* Ajuste de scroll-mt e paddings responsivos */
+      aria-labelledby="about-title"
       className="px-6 pt-16 pb-24 md:py-32 bg-[#02060f] border-y border-white/5 scroll-mt-5 overflow-hidden"
     >
       <div className="max-w-6xl mx-auto">
         {/* TEXTO DE INTRODUÇÃO + IMAGEM DESTAQUE */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center mb-24">
-          {/* Container da Imagem: Usando order-last no mobile para o título aparecer antes, 
-              OU mantendo no topo com margem negativa sutil para "subir" a imagem */}
           <div className="relative group order-first lg:order-first">
             <div className="absolute -inset-4 bg-[#00c2ff]/10 blur-xl rounded-2xl opacity-0 group-hover:opacity-100 transition duration-700"></div>
             <img
               src="https://i.pinimg.com/1200x/65/db/fe/65dbfe6053b93395a44a55f35679e70c.jpg"
-              alt="Casa inteligente"
+              alt="Interior de uma casa inteligente integrada com tecnologia LogiCasa"
               className="relative rounded-2xl grayscale-[50%] hover:grayscale-0 transition duration-700 object-cover h-[300px] md:h-[450px] w-full shadow-2xl"
+              loading="lazy"
             />
           </div>
 
           <div className="text-slate-300">
-            <h2 className="text-3xl md:text-5xl font-light mb-6 md:mb-8 text-white italic">
+            <h2
+              id="about-title"
+              className="text-3xl md:text-5xl font-light mb-6 md:mb-8 text-white italic"
+            >
               Sobre{" "}
               <span className="text-[#00c2ff] not-italic font-semibold">
                 Nós
@@ -45,8 +47,8 @@ export function About() {
             <p className="leading-relaxed text-base md:text-lg mb-3">
               Uma casa inteligente é aquela que se adapta ao estilo de vida dos
               moradores e torna suas vidas mais confortáveis, fazendo com que se
-              procupem apenas com o que mais importa: aproveitarem o conforto do
-              lar.
+              preocupem apenas com o que mais importa: aproveitarem o conforto
+              do lar.
             </p>
             <p className="leading-relaxed text-base md:text-lg mb-6">
               A LogiCasa nasceu do entusiasmo pelo conforto que a tecnologia
@@ -63,10 +65,10 @@ export function About() {
           </div>
         </div>
 
-        {/* CARDS DOS SÓCIOS */}
+        {/* CARDS DOS SÓCIOS - Usando <article> para melhor semântica */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
           {socios.map((socio) => (
-            <div
+            <article
               key={socio.nome}
               className={`group relative flex flex-col items-center md:flex-row md:items-end gap-6 bg-white/5 p-6 md:p-8 rounded-3xl border border-white/10 hover:border-[#00c2ff]/30 transition-all duration-500 ${
                 socio.nome.includes("Lafaiete") ? "md:flex-row-reverse" : ""
@@ -76,13 +78,15 @@ export function About() {
                 className={`absolute top-10 ${
                   socio.nome.includes("Rafael") ? "left-10" : "right-10"
                 } w-32 h-32 bg-[#00c2ff]/10 blur-[60px] rounded-full group-hover:bg-[#00c2ff]/30 transition-all`}
+                aria-hidden="true"
               ></div>
 
               <div className="relative w-40 md:w-52 shrink-0">
                 <img
                   src={socio.foto}
-                  alt={socio.nome}
+                  alt={`Sócio Fundador da LogiCasa: ${socio.nome}`}
                   className="w-full h-auto drop-shadow-[0_10px_20px_rgba(0,0,0,0.5)] group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
                 />
               </div>
 
@@ -97,7 +101,7 @@ export function About() {
                   {socio.bio}
                 </p>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </div>

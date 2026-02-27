@@ -23,7 +23,6 @@ export function ContactForm({ onSubmit, result }: ContactFormProps) {
 
   const [isFormValid, setIsFormValid] = useState(false);
 
-  // Validação interna do Honeypot antes de prosseguir com o onSubmit original
   const handleInternalSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -34,7 +33,6 @@ export function ContactForm({ onSubmit, result }: ContactFormProps) {
       return;
     }
 
-    // Disparo do evento de conversão para o GTM
     TagManager.dataLayer({
       dataLayer: {
         event: "generate_lead",
@@ -70,7 +68,6 @@ export function ContactForm({ onSubmit, result }: ContactFormProps) {
     }
   };
 
-  // --- VALIDAÇÕES ---
   const isNameValid = formData.name.trim().length >= 3;
 
   const isEmailValid =
@@ -93,17 +90,28 @@ export function ContactForm({ onSubmit, result }: ContactFormProps) {
     setIsFormValid(isNameValid && isMessageValid && hasContactMethod);
   }, [formData, isNameValid, isMessageValid, hasContactMethod]);
 
-  const ErrorMsg = ({ text }: { text: string }) => (
-    <p className="text-[10px] text-red-500/80 italic ml-1 mt-1 animate-in fade-in slide-in-from-left-1 duration-300">
+  const ErrorMsg = ({ text, id }: { text: string; id: string }) => (
+    <p
+      id={id}
+      className="text-[10px] text-red-500/80 italic ml-1 mt-1 animate-in fade-in slide-in-from-left-1 duration-300"
+      role="alert"
+    >
       {text}
     </p>
   );
 
   return (
     <div className="bg-[#050a15] p-8 rounded-3xl border border-white/5 shadow-2xl relative group">
-      <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#00c2ff]/5 blur-[80px] rounded-full pointer-events-none"></div>
+      <div
+        className="absolute -top-10 -right-10 w-32 h-32 bg-[#00c2ff]/5 blur-[80px] rounded-full pointer-events-none"
+        aria-hidden="true"
+      ></div>
 
-      <form onSubmit={handleInternalSubmit} className="space-y-5 relative z-10">
+      <form
+        onSubmit={handleInternalSubmit}
+        className="space-y-5 relative z-10"
+        aria-label="Formulário de contato LogiCasa"
+      >
         <input
           type="hidden"
           name="access_key"
@@ -121,72 +129,108 @@ export function ContactForm({ onSubmit, result }: ContactFormProps) {
 
         {/* Nome Completo */}
         <div className="space-y-2">
-          <label className="text-[10px] uppercase tracking-[0.2em] text-[#00c2ff] font-bold ml-1">
+          <label
+            htmlFor="name"
+            className="text-[10px] uppercase tracking-[0.2em] text-[#00c2ff] font-bold ml-1"
+          >
             Nome Completo
           </label>
           <input
+            id="name"
             type="text"
             name="name"
+            autoComplete="name"
             value={formData.name}
             onChange={handleChange}
             onBlur={handleBlur}
             placeholder="Ex: Enrico Palazzo"
+            aria-required="true"
+            aria-invalid={touched.name && !isNameValid}
+            aria-describedby={
+              touched.name && !isNameValid ? "name-error" : undefined
+            }
             className={`w-full bg-[#08101f] border ${touched.name && !isNameValid && formData.name.length > 0 ? "border-red-500/40" : "border-white/10"} text-white rounded-xl p-4 outline-none focus:border-[#00c2ff]/50 focus:ring-1 focus:ring-[#00c2ff]/30 transition-all duration-300 placeholder:text-slate-600`}
           />
           {touched.name && !isNameValid && formData.name.length > 0 && (
-            <ErrorMsg text="Mínimo de 3 caracteres." />
+            <ErrorMsg id="name-error" text="Mínimo de 3 caracteres." />
           )}
         </div>
 
         {/* E-mail */}
         <div className="space-y-2">
-          <label className="text-[10px] uppercase tracking-[0.2em] text-[#00c2ff] font-bold ml-1">
+          <label
+            htmlFor="email"
+            className="text-[10px] uppercase tracking-[0.2em] text-[#00c2ff] font-bold ml-1"
+          >
             E-mail
           </label>
           <input
+            id="email"
             type="email"
             name="email"
+            autoComplete="email"
             value={formData.email}
             onChange={handleChange}
             onBlur={handleBlur}
             placeholder="seu@email.com.br"
+            aria-required="true"
+            aria-invalid={touched.email && !isEmailValid}
+            aria-describedby={
+              touched.email && !isEmailValid ? "email-error" : undefined
+            }
             className={`w-full bg-[#08101f] border ${touched.email && formData.email.length > 0 && !isEmailValid ? "border-red-500/40" : "border-white/10"} text-white rounded-xl p-4 outline-none focus:border-[#00c2ff]/50 focus:ring-1 focus:ring-[#00c2ff]/30 transition-all duration-300 placeholder:text-slate-600`}
           />
           {touched.email && formData.email.length > 0 && !isEmailValid && (
-            <ErrorMsg text="E-mail inválido." />
+            <ErrorMsg id="email-error" text="E-mail inválido." />
           )}
         </div>
 
         {/* Telefone */}
         <div className="space-y-2">
-          <label className="text-[10px] uppercase tracking-[0.2em] text-[#00c2ff] font-bold ml-1">
+          <label
+            htmlFor="phone"
+            className="text-[10px] uppercase tracking-[0.2em] text-[#00c2ff] font-bold ml-1"
+          >
             Telefone / WhatsApp
           </label>
           <input
+            id="phone"
             type="tel"
             name="phone"
+            autoComplete="tel"
             value={formData.phone}
             onChange={handleChange}
             onBlur={handleBlur}
             placeholder="(11) 91234-5678"
+            aria-invalid={touched.phone && !isPhoneValid}
+            aria-describedby={
+              touched.phone && !isPhoneValid ? "phone-error" : undefined
+            }
             className={`w-full bg-[#08101f] border ${touched.phone && formData.phone.length > 0 && !isPhoneValid ? "border-red-500/40" : "border-white/10"} text-white rounded-xl p-4 outline-none focus:border-[#00c2ff]/50 focus:ring-1 focus:ring-[#00c2ff]/30 transition-all duration-300 placeholder:text-slate-600`}
           />
           {touched.phone && formData.phone.length > 0 && !isPhoneValid && (
-            <ErrorMsg text="Número de telefone / WhatsApp incompleto." />
+            <ErrorMsg
+              id="phone-error"
+              text="Número de telefone / WhatsApp incompleto."
+            />
           )}
         </div>
 
         {/* Mensagem */}
         <div className="space-y-2">
           <div className="flex justify-between items-end">
-            <label className="text-[10px] uppercase tracking-[0.2em] text-[#00c2ff] font-bold ml-1">
+            <label
+              htmlFor="message"
+              className="text-[10px] uppercase tracking-[0.2em] text-[#00c2ff] font-bold ml-1"
+            >
               Mensagem
             </label>
-            <span className="text-[9px] text-slate-500 mb-1">
+            <span className="text-[9px] text-slate-500 mb-1" aria-hidden="true">
               {formData.message.length} / 500
             </span>
           </div>
           <textarea
+            id="message"
             name="message"
             rows={4}
             maxLength={500}
@@ -194,6 +238,7 @@ export function ContactForm({ onSubmit, result }: ContactFormProps) {
             onChange={handleChange}
             onBlur={handleBlur}
             placeholder="Descreva sua solicitação ou dúvida."
+            aria-required="true"
             className={`w-full bg-[#08101f] border ${touched.message && formData.message.length > 0 && !isMessageValid ? "border-red-500/40" : "border-white/10"} text-white rounded-xl p-4 outline-none focus:border-[#00c2ff]/50 focus:ring-1 focus:ring-[#00c2ff]/30 transition-all duration-300 resize-none placeholder:text-slate-600`}
           ></textarea>
         </div>
@@ -222,7 +267,6 @@ export function ContactForm({ onSubmit, result }: ContactFormProps) {
         </button>
 
         <style>{`
-          /* Remove o fundo branco/azul do preenchimento automático */
           input:-webkit-autofill,
           input:-webkit-autofill:hover, 
           input:-webkit-autofill:focus,
@@ -243,7 +287,10 @@ export function ContactForm({ onSubmit, result }: ContactFormProps) {
         `}</style>
 
         {result && (
-          <div className="mt-4 p-4 rounded-xl bg-[#00c2ff]/5 border border-[#00c2ff]/20 animate-in fade-in slide-in-from-top-2 duration-500 text-center text-sm text-[#00c2ff] font-medium tracking-wide">
+          <div
+            role="status"
+            className="mt-4 p-4 rounded-xl bg-[#00c2ff]/5 border border-[#00c2ff]/20 animate-in fade-in slide-in-from-top-2 duration-500 text-center text-sm text-[#00c2ff] font-medium tracking-wide"
+          >
             {result}
           </div>
         )}
