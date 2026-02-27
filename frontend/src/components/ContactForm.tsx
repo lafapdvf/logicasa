@@ -104,11 +104,17 @@ export function ContactForm({ onSubmit, result }: ContactFormProps) {
       <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#00c2ff]/5 blur-[80px] rounded-full pointer-events-none"></div>
 
       <form onSubmit={handleInternalSubmit} className="space-y-5 relative z-10">
+        <input
+          type="hidden"
+          name="access_key"
+          value={import.meta.env.VITE_WEB3FORMS_KEY}
+        />
         <input type="hidden" name="from_name" value="Site LogiCasa" />
         <input
           type="checkbox"
           name="botcheck"
           className="hidden"
+          style={{ display: "none" }}
           tabIndex={-1}
           autoComplete="off"
         />
@@ -166,7 +172,7 @@ export function ContactForm({ onSubmit, result }: ContactFormProps) {
             className={`w-full bg-[#08101f] border ${touched.phone && formData.phone.length > 0 && !isPhoneValid ? "border-red-500/40" : "border-white/10"} text-white rounded-xl p-4 outline-none focus:border-[#00c2ff]/50 focus:ring-1 focus:ring-[#00c2ff]/30 transition-all duration-300 placeholder:text-slate-600`}
           />
           {touched.phone && formData.phone.length > 0 && !isPhoneValid && (
-            <ErrorMsg text="Telefone incompleto." />
+            <ErrorMsg text="Número de telefone / WhatsApp incompleto." />
           )}
         </div>
 

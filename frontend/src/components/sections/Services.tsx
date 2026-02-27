@@ -41,7 +41,7 @@ export function Services() {
 
   return (
     <section
-      id="servicos"
+      id="solucoes"
       /* AJUSTE AQUI: scroll-mt deve bater com a altura do header. 
          Reduzi o padding superior (pt) e mantive o inferior (pb) para o respiro. */
       className="px-6 pt-16 pb-24 md:pt-24 md:pb-32 bg-[#02060f] border-y border-white/5 scroll-mt-20"

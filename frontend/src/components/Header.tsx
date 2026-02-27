@@ -11,8 +11,8 @@ export function Header({ activeSection: initialActiveSection }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const navLinks = [
+    { name: "Soluções", href: "#solucoes" },
     { name: "Sobre", href: "#sobre" },
-    { name: "Soluções", href: "#servicos" },
     { name: "Contato", href: "#contato" },
   ];
 

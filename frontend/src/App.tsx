@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Header } from "./components/Header";
 import { Hero } from "./components/sections/Hero";
-import { About } from "./components/sections/About";
-import { Mission } from "./components/sections/Mission";
 import { Services } from "./components/sections/Services";
+import { Mission } from "./components/sections/Mission";
+import { About } from "./components/sections/About";
 import { InstagramFeed } from "./components/sections/InstagramFeed";
 import { Contact } from "./components/sections/Contact";
 import { Footer } from "./components/sections/Footer";
@@ -64,9 +64,9 @@ export default function App() {
           <Header activeSection={activeSection} />
           <main>
             <Hero />
-            <About />
-            <Mission />
             <Services />
+            <Mission />
+            <About />
             <InstagramFeed />
             <Contact onSubmit={onSubmit} result={result} />
           </main>
