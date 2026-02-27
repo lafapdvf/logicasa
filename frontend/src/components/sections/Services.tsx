@@ -44,7 +44,7 @@ export function Services() {
       id="solucoes"
       /* AJUSTE AQUI: scroll-mt deve bater com a altura do header. 
          Reduzi o padding superior (pt) e mantive o inferior (pb) para o respiro. */
-      className="px-6 pt-16 pb-24 md:pt-24 md:pb-32 bg-[#02060f] border-y border-white/5 scroll-mt-20"
+      className="px-6 pt-16 pb-24 md:pt-24 md:pb-32 bg-[#02060f] border-y border-white/5 scroll-mt-5"
     >
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl md:text-5xl font-light mb-12 md:mb-20 text-center tracking-tight">

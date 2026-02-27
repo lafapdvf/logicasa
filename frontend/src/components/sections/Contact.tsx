@@ -8,7 +8,7 @@ interface ContactSectionProps {
 
 export function Contact({ onSubmit, result }: ContactSectionProps) {
   return (
-    <section id="contato" className="px-6 py-24 bg-[#02060f] scroll-mt-20">
+    <section id="contato" className="px-6 py-24 bg-[#02060f]">
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
           <div className="flex flex-col justify-center">

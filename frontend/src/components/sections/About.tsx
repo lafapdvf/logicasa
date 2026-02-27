@@ -19,7 +19,7 @@ export function About() {
     <section
       id="sobre"
       /* Ajuste de scroll-mt e paddings responsivos */
-      className="px-6 pt-16 pb-24 md:py-32 bg-[#02060f] border-y border-white/5 scroll-mt-20 overflow-hidden"
+      className="px-6 pt-16 pb-24 md:py-32 bg-[#02060f] border-y border-white/5 scroll-mt-5 overflow-hidden"
     >
       <div className="max-w-6xl mx-auto">
         {/* TEXTO DE INTRODUÇÃO + IMAGEM DESTAQUE */}

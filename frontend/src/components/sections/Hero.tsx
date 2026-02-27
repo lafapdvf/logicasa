@@ -34,7 +34,7 @@ export function Hero() {
 
         <div className="mt-12">
           <a
-            href="#servicos"
+            href="#solucoes"
             className="animate-bounce inline-block text-[#00c2ff] group"
           >
             <span className="text-[10px] uppercase tracking-[0.3em] group-hover:text-white transition-colors">
