@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { Header } from "./components/Header";
 import { Hero } from "./components/sections/Hero";
+import { Experience } from "./components/sections/Experience";
 import { Solutions } from "./components/sections/Solutions";
 import { Mission } from "./components/sections/Mission";
 import { About } from "./components/sections/About";
-import { InstagramFeed } from "./components/sections/InstagramFeed";
+// import { InstagramFeed } from "./components/sections/InstagramFeed";
 import { Contact } from "./components/sections/Contact";
 import { Footer } from "./components/sections/Footer";
 import { SuccessScreen } from "./components/sections/SuccessScreen";
@@ -88,10 +89,11 @@ export default function App() {
           <Header activeSection={activeSection} />
           <main>
             <Hero />
+            <Experience />
             <Solutions />
             <Mission />
             <About />
-            <InstagramFeed />
+            {/* <InstagramFeed /> */}
             <Contact onSubmit={onSubmit} result={result} />
           </main>
           <Footer />

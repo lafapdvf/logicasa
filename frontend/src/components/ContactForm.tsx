@@ -143,7 +143,7 @@ export function ContactForm({ onSubmit, result }: ContactFormProps) {
             value={formData.name}
             onChange={handleChange}
             onBlur={handleBlur}
-            placeholder="Ex: Enrico Palazzo"
+            placeholder="Ex: Enrico Pallazzo"
             aria-required="true"
             aria-invalid={touched.name && !isNameValid}
             aria-describedby={

@@ -2,6 +2,13 @@ import smarthome from "../../assets/smarthome.webp";
 import logicasa from "../../assets/logicasa.png";
 
 export function Hero() {
+  const scrollToExperience = () => {
+    const element = document.getElementById("experiencia");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center text-center px-6 overflow-hidden">
       {/* Background com Imagem e Overlay */}
@@ -15,7 +22,7 @@ export function Hero() {
       </div>
 
       <div className="relative z-10 flex flex-col items-center">
-        {/* Título H1 para SEO (Escondido visualmente, mas visível para o Google) */}
+        {/* Título H1 para SEO */}
         <h1 className="sr-only">
           LogiCasa | Automação Residencial Acessível em São Paulo - SP
         </h1>
@@ -32,16 +39,17 @@ export function Hero() {
           />
         </div>
 
-        {/* Descrição curta com tag de parágrafo (boa para semântica) */}
+        {/* Descrição curta */}
         <p className="mt-4 max-w-2xl mx-auto text-slate-400 text-lg md:text-xl font-light">
           Sofisticação e conforto de alto padrão para todos os padrões de
           residências.
         </p>
 
         <div className="mt-12">
-          <a
-            href="#solucoes"
-            className="animate-bounce inline-block text-[#00c2ff] group"
+          <button
+            onClick={scrollToExperience}
+            className="animate-bounce inline-block text-[#00c2ff] group focus:outline-none"
+            aria-label="Ver mais sobre a experiência LogiCasa"
           >
             <span className="text-[10px] uppercase tracking-[0.3em] group-hover:text-white transition-colors">
               Veja mais
@@ -49,7 +57,7 @@ export function Hero() {
             <div className="text-2xl" aria-hidden="true">
               ↓
             </div>
-          </a>
+          </button>
         </div>
       </div>
     </section>

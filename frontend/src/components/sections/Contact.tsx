@@ -32,11 +32,11 @@ export function Contact({ onSubmit, result }: ContactSectionProps) {
             </p>
             <p className="text-slate-400 text-lg mb-2">
               Entre em contato através de um dos nossos canais ou preencha o
-              formulário ao lado. Estamos ansiosos para ouvir suas ideias!
+              formulário ao lado. Estamos ansiosos pelas suas ideias!
             </p>
             <p className="text-slate-400 text-lg mb-8">
-              Atendemos principalmente na **Grande São Paulo**, mas estamos
-              abertos a projetos em outras regiões.
+              Atendemos principalmente na Grande São Paulo, mas estamos abertos
+              a projetos em outras regiões.
             </p>
 
             {/* address: Tag semântica para informações de contato de uma empresa */}
