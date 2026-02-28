@@ -51,10 +51,10 @@ export function Contact({ onSubmit, result }: ContactSectionProps) {
                     WhatsApp
                   </p>
                   <a
-                    href="https://wa.me/5511999999999"
+                    href="https://wa.me/5511992134527"
                     className="text-white hover:text-[#00c2ff] transition-colors text-lg font-light"
                   >
-                    +55 (11) 99999-9999
+                    +55 (11) 99213-4527
                   </a>
                 </div>
               </div>
