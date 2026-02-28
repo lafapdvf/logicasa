@@ -54,8 +54,8 @@ export function Experience() {
           </h2>
           <p className="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed">
             A automação residencial não serve para complicar, mas para eliminar
-            as pequenas fricções do seu dia a dia que você já se acostumou a
-            aguentar.
+            as pequenas dores do seu dia a dia que você já se acostumou a
+            aguentar e não sabe como resolver.
           </p>
         </div>
 
