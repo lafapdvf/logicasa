@@ -18,7 +18,7 @@ const scenarios = [
     icon: <ShieldCheck className="w-8 h-8 text-[#00c2ff]" />,
     title: "Paz de Espírito",
     description:
-      "Aquela dúvida se trancou a porta ou desligou o ferro acabou. Sua casa se auto-configura para o 'Modo Sair' com um único toque no celular ou um comando de voz.",
+      "Aquela dúvida se trancou a porta ou apagou as luzes acabou. Sua casa se auto-configura para o 'Modo Sair' com um único toque no celular ou um comando de voz.",
   },
   {
     icon: <Moon className="w-8 h-8 text-[#00c2ff]" />,
