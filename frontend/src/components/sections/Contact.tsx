@@ -1,5 +1,10 @@
 import { ContactForm } from "./../ContactForm";
-import { Mail, Instagram, MessageCircle } from "lucide-react";
+// @ts-ignore
+import Mail from "lucide-react/dist/esm/icons/mail";
+// @ts-ignore
+import Instagram from "lucide-react/dist/esm/icons/instagram";
+// @ts-ignore
+import MessageCircle from "lucide-react/dist/esm/icons/message-circle";
 
 interface ContactSectionProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;

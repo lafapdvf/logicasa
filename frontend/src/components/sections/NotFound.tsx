@@ -1,4 +1,7 @@
-import { Home, AlertCircle } from "lucide-react";
+// @ts-ignore
+import Home from "lucide-react/dist/esm/icons/home";
+// @ts-ignore
+import AlertCircle from "lucide-react/dist/esm/icons/alert-circle";
 
 interface NotFoundProps {
   onBack: () => void;

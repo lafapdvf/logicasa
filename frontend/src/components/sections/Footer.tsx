@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
-import { ChevronUp, X } from "lucide-react";
+// @ts-ignore
+import ChevronUp from "lucide-react/dist/esm/icons/chevron-up";
+// @ts-ignore
+import X from "lucide-react/dist/esm/icons/x";
 
 export function Footer() {
   const [modalContent, setModalContent] = useState<

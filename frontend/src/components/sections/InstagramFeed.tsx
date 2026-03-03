@@ -1,4 +1,5 @@
-import { Instagram } from "lucide-react";
+// @ts-ignore
+import Instagram from "lucide-react/dist/esm/icons/instagram";
 
 export function InstagramFeed() {
   const posts = [

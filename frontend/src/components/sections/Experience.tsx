@@ -1,4 +1,11 @@
-import { Coffee, Moon, ShieldCheck, Home } from "lucide-react";
+// @ts-ignore
+import Coffee from "lucide-react/dist/esm/icons/coffee";
+// @ts-ignore
+import Moon from "lucide-react/dist/esm/icons/moon";
+// @ts-ignore
+import ShieldCheck from "lucide-react/dist/esm/icons/shield-check";
+// @ts-ignore
+import Home from "lucide-react/dist/esm/icons/home";
 
 const scenarios = [
   {

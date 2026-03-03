@@ -1,5 +1,5 @@
-import smarthome from "../../assets/smarthome.webp";
-import logicasa from "../../assets/logicasa.png";
+import smarthome from "/smarthome.webp";
+import logicasa from "/logicasa.webp";
 
 export function Hero() {
   const scrollToExperience = () => {
@@ -16,6 +16,11 @@ export function Hero() {
         <img
           src={smarthome}
           alt="Fundo de casa inteligente com automação"
+          // Melhorias de Performance:
+          width="1920"
+          height="1080"
+          decoding="async"
+          fetchPriority="low" // O fundo não deve competir com a Logo
           className="w-full h-full object-cover opacity-20"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#02060f] via-transparent to-[#02060f]"></div>
@@ -35,6 +40,11 @@ export function Hero() {
           <img
             src={logicasa}
             alt="LogiCasa - Automação Residencial Inteligente"
+            // Melhorias de Performance (Crítico para LCP):
+            width="800"
+            height="400"
+            fetchPriority="high"
+            decoding="sync" // Garante que a logo apareça junto com o primeiro frame
             className="h-48 md:h-96 w-auto drop-shadow-[0_0_15px_rgba(0,194,255,0.4)]"
           />
         </div>

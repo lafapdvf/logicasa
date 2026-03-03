@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import TagManager from "react-gtm-module";
 
 interface ContactFormProps {
@@ -23,81 +23,90 @@ export function ContactForm({ onSubmit, result }: ContactFormProps) {
 
   const [isFormValid, setIsFormValid] = useState(false);
 
-  const handleInternalSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const isBot = data.get("botcheck") === "on";
+  const validations = useMemo(() => {
+    const isNameValid = formData.name.trim().length >= 3;
+    const isEmailValid =
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email) &&
+      !formData.email.endsWith(".");
+    const isPhoneValid = formData.phone.replace(/\D/g, "").length >= 10;
+    const isMessageValid =
+      formData.message.trim().length > 0 && formData.message.length <= 500;
+    const hasContactMethod = isEmailValid || isPhoneValid;
 
-    if (isBot) {
-      console.warn("Spam detectado.");
-      return;
-    }
+    return {
+      isNameValid,
+      isEmailValid,
+      isPhoneValid,
+      isMessageValid,
+      allValid: isNameValid && isMessageValid && hasContactMethod,
+    };
+  }, [formData]);
 
-    TagManager.dataLayer({
-      dataLayer: {
-        event: "generate_lead",
-        formId: "contato_logicasa",
-        formName: "Formulário de Contato",
-      },
-    });
+  const handleInternalSubmit = useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      const data = new FormData(event.currentTarget);
+      if (data.get("botcheck") === "on") return;
 
-    onSubmit(event);
-  };
+      TagManager.dataLayer({
+        dataLayer: {
+          event: "generate_lead",
+          formId: "contato_logicasa",
+          formName: "Formulário de Contato",
+        },
+      });
 
-  const maskPhone = (value: string) => {
-    return value
-      .replace(/\D/g, "")
-      .replace(/^(\d{2})(\d)/g, "($1) $2")
-      .replace(/(\d{5})(\d)/, "$1-$2")
+      onSubmit(event);
+    },
+    [onSubmit],
+  );
+
+  const maskPhone = useCallback((value: string) => {
+    const cleanValue = value.replace(/\D/g, "");
+    if (cleanValue.length < 2) return cleanValue;
+
+    return cleanValue
+      .replace(/^(\d{2})/, "($1) ")
+      .replace(/(\d{4,5})(\d{4})$/, "$1-$2")
       .substring(0, 15);
-  };
+  }, []);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    const { name, value } = e.target;
-    const updatedValue = name === "phone" ? maskPhone(value) : value;
-    setFormData((prev) => ({ ...prev, [name]: updatedValue }));
-  };
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = e.target;
+      setFormData((prev) => ({
+        ...prev,
+        [name]: name === "phone" ? maskPhone(value) : value,
+      }));
+    },
+    [maskPhone],
+  );
 
-  const handleBlur = (
-    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    if (e.target.value.length > 0) {
-      setTouched((prev) => ({ ...prev, [e.target.name]: true }));
-    }
-  };
-
-  const isNameValid = formData.name.trim().length >= 3;
-
-  const isEmailValid =
-    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(formData.email) &&
-    !formData.email.endsWith(".");
-
-  const isPhoneValid = formData.phone.replace(/\D/g, "").length >= 10;
-  const isMessageValid =
-    formData.message.trim().length > 0 && formData.message.length <= 500;
-  const hasContactMethod = isEmailValid || isPhoneValid;
+  const handleBlur = useCallback(
+    (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      if (e.target.value.length > 0) {
+        setTouched((prev) => ({ ...prev, [e.target.name]: true }));
+      }
+    },
+    [],
+  );
 
   useEffect(() => {
-    const isFormEmpty = Object.values(formData).every(
-      (val) => val.trim() === "",
-    );
-    if (isFormEmpty) {
-      setTouched({ name: false, email: false, phone: false, message: false });
-    }
+    setIsFormValid(validations.allValid);
+  }, [validations.allValid]);
 
-    setIsFormValid(isNameValid && isMessageValid && hasContactMethod);
-  }, [formData, isNameValid, isMessageValid, hasContactMethod]);
-
-  const ErrorMsg = ({ text, id }: { text: string; id: string }) => (
-    <p
-      id={id}
-      className="text-[10px] text-red-500/80 italic ml-1 mt-1 animate-in fade-in slide-in-from-left-1 duration-300"
-      role="alert"
-    >
-      {text}
-    </p>
+  const ErrorMsg = useMemo(
+    () =>
+      ({ text, id }: { text: string; id: string }) => (
+        <p
+          id={id}
+          className="text-[10px] text-red-500/80 italic ml-1 mt-1 animate-in fade-in slide-in-from-left-1 duration-300"
+          role="alert"
+        >
+          {text}
+        </p>
+      ),
+    [],
   );
 
   return (
@@ -105,7 +114,7 @@ export function ContactForm({ onSubmit, result }: ContactFormProps) {
       <div
         className="absolute -top-10 -right-10 w-32 h-32 bg-[#00c2ff]/5 blur-[80px] rounded-full pointer-events-none"
         aria-hidden="true"
-      ></div>
+      />
 
       <form
         onSubmit={handleInternalSubmit}
@@ -127,7 +136,6 @@ export function ContactForm({ onSubmit, result }: ContactFormProps) {
           autoComplete="off"
         />
 
-        {/* Nome Completo */}
         <div className="space-y-2">
           <label
             htmlFor="name"
@@ -145,18 +153,15 @@ export function ContactForm({ onSubmit, result }: ContactFormProps) {
             onBlur={handleBlur}
             placeholder="Ex: Enrico Pallazzo"
             aria-required="true"
-            aria-invalid={touched.name && !isNameValid}
-            aria-describedby={
-              touched.name && !isNameValid ? "name-error" : undefined
-            }
-            className={`w-full bg-[#08101f] border ${touched.name && !isNameValid && formData.name.length > 0 ? "border-red-500/40" : "border-white/10"} text-white rounded-xl p-4 outline-none focus:border-[#00c2ff]/50 focus:ring-1 focus:ring-[#00c2ff]/30 transition-all duration-300 placeholder:text-slate-600`}
+            className={`w-full bg-[#08101f] border ${touched.name && !validations.isNameValid && formData.name.length > 0 ? "border-red-500/40" : "border-white/10"} text-white rounded-xl p-4 outline-none focus:border-[#00c2ff]/50 transition-all duration-300 placeholder:text-slate-600`}
           />
-          {touched.name && !isNameValid && formData.name.length > 0 && (
-            <ErrorMsg id="name-error" text="Mínimo de 3 caracteres." />
-          )}
+          {touched.name &&
+            !validations.isNameValid &&
+            formData.name.length > 0 && (
+              <ErrorMsg id="name-error" text="Mínimo de 3 caracteres." />
+            )}
         </div>
 
-        {/* E-mail */}
         <div className="space-y-2">
           <label
             htmlFor="email"
@@ -174,18 +179,15 @@ export function ContactForm({ onSubmit, result }: ContactFormProps) {
             onBlur={handleBlur}
             placeholder="seu@email.com.br"
             aria-required="true"
-            aria-invalid={touched.email && !isEmailValid}
-            aria-describedby={
-              touched.email && !isEmailValid ? "email-error" : undefined
-            }
-            className={`w-full bg-[#08101f] border ${touched.email && formData.email.length > 0 && !isEmailValid ? "border-red-500/40" : "border-white/10"} text-white rounded-xl p-4 outline-none focus:border-[#00c2ff]/50 focus:ring-1 focus:ring-[#00c2ff]/30 transition-all duration-300 placeholder:text-slate-600`}
+            className={`w-full bg-[#08101f] border ${touched.email && formData.email.length > 0 && !validations.isEmailValid ? "border-red-500/40" : "border-white/10"} text-white rounded-xl p-4 outline-none focus:border-[#00c2ff]/50 transition-all duration-300 placeholder:text-slate-600`}
           />
-          {touched.email && formData.email.length > 0 && !isEmailValid && (
-            <ErrorMsg id="email-error" text="E-mail inválido." />
-          )}
+          {touched.email &&
+            formData.email.length > 0 &&
+            !validations.isEmailValid && (
+              <ErrorMsg id="email-error" text="E-mail inválido." />
+            )}
         </div>
 
-        {/* Telefone */}
         <div className="space-y-2">
           <label
             htmlFor="phone"
@@ -202,21 +204,15 @@ export function ContactForm({ onSubmit, result }: ContactFormProps) {
             onChange={handleChange}
             onBlur={handleBlur}
             placeholder="(11) 91234-5678"
-            aria-invalid={touched.phone && !isPhoneValid}
-            aria-describedby={
-              touched.phone && !isPhoneValid ? "phone-error" : undefined
-            }
-            className={`w-full bg-[#08101f] border ${touched.phone && formData.phone.length > 0 && !isPhoneValid ? "border-red-500/40" : "border-white/10"} text-white rounded-xl p-4 outline-none focus:border-[#00c2ff]/50 focus:ring-1 focus:ring-[#00c2ff]/30 transition-all duration-300 placeholder:text-slate-600`}
+            className={`w-full bg-[#08101f] border ${touched.phone && formData.phone.length > 0 && !validations.isPhoneValid ? "border-red-500/40" : "border-white/10"} text-white rounded-xl p-4 outline-none focus:border-[#00c2ff]/50 transition-all duration-300 placeholder:text-slate-600`}
           />
-          {touched.phone && formData.phone.length > 0 && !isPhoneValid && (
-            <ErrorMsg
-              id="phone-error"
-              text="Número de telefone / WhatsApp incompleto."
-            />
-          )}
+          {touched.phone &&
+            formData.phone.length > 0 &&
+            !validations.isPhoneValid && (
+              <ErrorMsg id="phone-error" text="Número incompleto." />
+            )}
         </div>
 
-        {/* Mensagem */}
         <div className="space-y-2">
           <div className="flex justify-between items-end">
             <label
@@ -225,7 +221,7 @@ export function ContactForm({ onSubmit, result }: ContactFormProps) {
             >
               Mensagem
             </label>
-            <span className="text-[9px] text-slate-500 mb-1" aria-hidden="true">
+            <span className="text-[9px] text-slate-500 mb-1">
               {formData.message.length} / 500
             </span>
           </div>
@@ -237,10 +233,10 @@ export function ContactForm({ onSubmit, result }: ContactFormProps) {
             value={formData.message}
             onChange={handleChange}
             onBlur={handleBlur}
-            placeholder="Descreva sua solicitação ou dúvida."
+            placeholder="Descreva sua solicitação."
             aria-required="true"
-            className={`w-full bg-[#08101f] border ${touched.message && formData.message.length > 0 && !isMessageValid ? "border-red-500/40" : "border-white/10"} text-white rounded-xl p-4 outline-none focus:border-[#00c2ff]/50 focus:ring-1 focus:ring-[#00c2ff]/30 transition-all duration-300 resize-none placeholder:text-slate-600`}
-          ></textarea>
+            className={`w-full bg-[#08101f] border ${touched.message && formData.message.length > 0 && !validations.isMessageValid ? "border-red-500/40" : "border-white/10"} text-white rounded-xl p-4 outline-none focus:border-[#00c2ff]/50 transition-all duration-300 resize-none placeholder:text-slate-600`}
+          />
         </div>
 
         <button
@@ -256,40 +252,20 @@ export function ContactForm({ onSubmit, result }: ContactFormProps) {
                 ? "shake 0.5s cubic-bezier(.36,.07,.19,.97) both"
                 : "none",
           }}
-          className={`w-full font-black py-4 rounded-xl transition-all duration-500 uppercase text-xs tracking-[0.2em] mt-4 shadow-lg
-            ${
-              isFormValid
-                ? "bg-[#00c2ff] text-black hover:bg-[#00e0ff] hover:scale-[1.01] active:scale-[0.98] cursor-pointer shadow-[#00c2ff]/20"
-                : "bg-slate-800 text-slate-500 cursor-not-allowed opacity-50"
-            }`}
+          className={`w-full font-black py-4 rounded-xl transition-all duration-500 uppercase text-xs tracking-[0.2em] mt-4 ${isFormValid ? "bg-[#00c2ff] text-black hover:bg-[#00e0ff] cursor-pointer" : "bg-slate-800 text-slate-500 cursor-not-allowed opacity-50"}`}
         >
-          {isFormValid ? "Enviar Solicitação" : "Preencha os Campos Acima"}
+          {isFormValid ? "Enviar Solicitação" : "Preencha os Campos"}
         </button>
 
         <style>{`
-          input:-webkit-autofill,
-          input:-webkit-autofill:hover, 
-          input:-webkit-autofill:focus,
-          textarea:-webkit-autofill,
-          textarea:-webkit-autofill:hover,
-          textarea:-webkit-autofill:focus {
-            -webkit-text-fill-color: white !important;
-            -webkit-box-shadow: 0 0 0px 1000px #08101f inset !important;
-            transition: background-color 5000s ease-in-out 0s;
-          }
-
-          @keyframes shake {
-            10%, 90% { transform: translate3d(-1px, 0, 0); }
-            20%, 80% { transform: translate3d(2px, 0, 0); }
-            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-            40%, 60% { transform: translate3d(4px, 0, 0); }
-          }
+          input:-webkit-autofill, textarea:-webkit-autofill { -webkit-text-fill-color: white !important; -webkit-box-shadow: 0 0 0px 1000px #08101f inset !important; }
+          @keyframes shake { 10%, 90% { transform: translate3d(-1px, 0, 0); } 20%, 80% { transform: translate3d(2px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-4px, 0, 0); } 40%, 60% { transform: translate3d(4px, 0, 0); } }
         `}</style>
 
         {result && (
           <div
             role="status"
-            className="mt-4 p-4 rounded-xl bg-[#00c2ff]/5 border border-[#00c2ff]/20 animate-in fade-in slide-in-from-top-2 duration-500 text-center text-sm text-[#00c2ff] font-medium tracking-wide"
+            className="mt-4 p-4 rounded-xl bg-[#00c2ff]/5 border border-[#00c2ff]/20 text-center text-sm text-[#00c2ff] font-medium"
           >
             {result}
           </div>

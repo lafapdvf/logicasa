@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import logicasa from "../assets/logicasa.png";
+import logicasa from "/logicasa.webp";
 
 interface HeaderProps {
   activeSection: string;
