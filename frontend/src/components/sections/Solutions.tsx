@@ -22,13 +22,13 @@ export function Solutions() {
       img: "https://www.deltalinkit.com/wp-content/uploads/2023/07/%D8%A8%D8%A7%D8%B1%D8%B2%D8%A9-1536x975.jpg?v=1713965881&auto=format&fit=crop&q=80&w=1000",
     },
     {
-      title: "Áudio & Vídeo Imersivos",
+      title: "Áudio e Vídeo Imersivos",
       desc: "Home Theaters, Home Cinemas e multirooms integrados à sua automação residencial.",
       img: "https://images.unsplash.com/photo-1721733258410-35e699661ad6?q=80&w=1170&auto=format&fit=crop",
     },
     {
-      title: "Paineis & Displays de LED",
-      desc: "Seja em ambientes residenciais ou comerciais, é a sua garantia de diversão e casa cheia na Copa do Mundo.",
+      title: "Paineis de LED",
+      desc: "Seja em ambientes residenciais ou comerciais, são a sua garantia de diversão e casa cheia na Copa do Mundo.",
       img: "https://i.pinimg.com/736x/77/fa/d0/77fad0c49d4eeafdce8a1d0e30647bda.jpg",
     },
     {
